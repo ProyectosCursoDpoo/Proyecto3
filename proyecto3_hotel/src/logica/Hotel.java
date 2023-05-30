@@ -171,6 +171,7 @@ public class Hotel {
     }
 
     public void guardarInformacion() {
+        guardarDatabase(database);
         guardarInfoHabitacion(habitaciones);
         guardarTarifa(tarifasEstandar, "tarifa.txt");
         guardarTarifa(tarifasSuite, "tarifa2.txt");
@@ -333,6 +334,13 @@ public class Hotel {
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void agregarUsuario(String usuario, String contrasena) {
+        database.put(usuario, contrasena);
+        for (String i : database.keySet()) {
+            System.out.println(i);
         }
     }
 
@@ -619,6 +627,24 @@ public class Hotel {
     }
 
     // TODO: cargar factura
+
+    public void guardarDatabase(HashMap<String, String> lista){
+        try (
+                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+                        "../Proyecto3/proyecto3_hotel/data/database.txt")))) {
+            String cadena = "";
+            for (Object k : lista.keySet()) {
+                String usuario = k.toString();
+                String password = lista.get(k).toString();
+                cadena += usuario + ";" + password + "\n";
+            }
+            bw.write(cadena);
+            bw.close();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+    }
 
     public void guardarInfoHabitacion(HashMap<Integer, Habitacion> lista) {
 

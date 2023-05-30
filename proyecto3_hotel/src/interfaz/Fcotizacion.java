@@ -125,9 +125,14 @@ public class Fcotizacion extends JFrame implements ActionListener {
                 HashMap<String, Integer> tarifasEstandar = hotel.getTarifasEstandar();
                 HashMap<String, Integer> tarifasSuite = hotel.getTarifasSuite();
                 HashMap<String, Integer> tarifasSuite2 = hotel.getTarifasSuite2();
-
-                recepcionista.darCotizacion(llegada, salida, huespedes, habitaciones, tarifasEstandar, tarifasSuite,
+                HashMap<Integer, Habitacion> info_habitaciones_disponibles = recepcionista.darCotizacion(llegada, salida, huespedes, habitaciones, tarifasEstandar, tarifasSuite,
                         tarifasSuite2, recepcionista);
+
+                Fhabitaciones ventaHabitaciones = new Fhabitaciones(info_habitaciones_disponibles, llegada, salida,
+                recepcionista);
+                ventaHabitaciones.setVisible(true);
+
+
             }
         } else if (comando.equals("ocupacion")) {
             FOcupacion ventanaFOcupacion = new FOcupacion();
