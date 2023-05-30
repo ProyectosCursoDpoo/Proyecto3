@@ -75,7 +75,7 @@ public class FCrearPlato extends JFrame implements ActionListener{
         info2.setForeground(Color.RED);
         info2.setHorizontalAlignment(JLabel.CENTER);
 
-        JPanel grilla = new JPanel(new GridLayout(7, 2, 20, 30));
+        JPanel grilla = new JPanel(new GridLayout(7, 2, 20, 25));
         grilla.setBackground(Color.LIGHT_GRAY);
         grilla.add(lista_platos);
         grilla.add(lista_in);
@@ -94,10 +94,10 @@ public class FCrearPlato extends JFrame implements ActionListener{
         
         panel1.add(grilla, BorderLayout.CENTER);
 
-        Component spacer = Box.createHorizontalStrut(400);
-        Component spacer2 = Box.createHorizontalStrut(400);
-        Component spacer3 = Box.createVerticalStrut(100);
-        Component spacer4 = Box.createVerticalStrut(100);
+        Component spacer = Box.createHorizontalStrut(200);
+        Component spacer2 = Box.createHorizontalStrut(200);
+        Component spacer3 = Box.createVerticalStrut(80);
+        Component spacer4 = Box.createVerticalStrut(80);
 
         panel1.add(spacer, BorderLayout.WEST);
         panel1.add(spacer2, BorderLayout.EAST);

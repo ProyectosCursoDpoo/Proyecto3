@@ -56,8 +56,8 @@ public class FCambiarTarifa extends JFrame implements ActionListener{
 
         panel1.add(grilla, BorderLayout.CENTER);
 
-        Component spacer = Box.createHorizontalStrut(400);
-        Component spacer2 = Box.createHorizontalStrut(400);
+        Component spacer = Box.createHorizontalStrut(200);
+        Component spacer2 = Box.createHorizontalStrut(200);
         Component spacer3 = Box.createVerticalStrut(100);
         Component spacer4 = Box.createVerticalStrut(200);
 

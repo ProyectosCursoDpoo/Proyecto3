@@ -130,17 +130,17 @@ public class FAdmin extends JPanel implements ActionListener{
         if (comando.equals("Cargar Habitaciones")){
             
             File archivoHabitaciones = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/habitaciones2.txt");
+                        "../Proyecto3/proyecto3_hotel/data/habitaciones2.txt");
             this.admin.cargarHabitaciones(archivoHabitaciones, this.principal.hotel.tarifasEstandar, this.principal.hotel.tarifasSuite, this.principal.hotel.tarifasSuite2, this.principal.hotel.habitaciones);
             JOptionPane.showMessageDialog(this, "Habitaciones Cargadas Exitosamente", "Carga Exitosa", JOptionPane.INFORMATION_MESSAGE);
         }
         else if (comando.equals("Cargar Tarifas")){
             File archivoTarifaEstandar = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa.txt");
+                        "../Proyecto3/proyecto3_hotel/data/tarifa.txt");
                 File archivoTarifaSuite = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa2.txt");
+                        "../Proyecto3/proyecto3_hotel/data/tarifa2.txt");
                 File archivoTarifaSuite2 = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa3.txt");
+                        "../Proyecto3/proyecto3_hotel/data/tarifa3.txt");
             this.admin.cargarTarifa(archivoTarifaEstandar, this.principal.hotel.tarifasEstandar);
             this.admin.cargarTarifa(archivoTarifaSuite, this.principal.hotel.tarifasSuite);
             this.admin.cargarTarifa(archivoTarifaSuite2, this.principal.hotel.tarifasSuite2);
@@ -150,7 +150,7 @@ public class FAdmin extends JPanel implements ActionListener{
         
         else if (comando.equals("Cargar Menú")){
             File archivoMenu = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/menu.txt");
+                        "../Proyecto3/proyecto3_hotel/data/menu.txt");
             this.admin.cargarMenu(archivoMenu, this.principal.hotel.platos);
             JOptionPane.showMessageDialog(this, "Menú Cargado Exitosamente", "Carga Exitosa", JOptionPane.INFORMATION_MESSAGE);
         }

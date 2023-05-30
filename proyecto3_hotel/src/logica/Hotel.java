@@ -23,6 +23,14 @@ public class Hotel {
     public HashMap<Integer, Grupo> grupos = new HashMap<>();
     public HashMap<Integer, Consumo> consumos = new HashMap<>();
 
+    public boolean parking_gratis = true;
+    public boolean piscina = true;
+    public boolean zonas_humedas = true;
+    public boolean wifi_gratis = true;
+    public boolean bbq = true;
+    public boolean recepcion_24 = true;
+    public boolean pet_friendly = true;
+
     public Empleado empleado;
 
     public void cargarInformacion() {
@@ -31,11 +39,11 @@ public class Hotel {
             cargarDatabase();
 
             cargarTarifa(new File(
-                    "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa.txt"), tarifasEstandar);
+                    "../Proyecto3/proyecto3_hotel/data/tarifa.txt"), tarifasEstandar);
             cargarTarifa(new File(
-                    "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa2.txt"), tarifasSuite);
+                    "../Proyecto3/proyecto3_hotel/data/tarifa2.txt"), tarifasSuite);
             cargarTarifa(new File(
-                    "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa3.txt"), tarifasSuite2);
+                    "../Proyecto3/proyecto3_hotel/data/tarifa3.txt"), tarifasSuite2);
 
             cargarHabitaciones();
 
@@ -268,7 +276,7 @@ public class Hotel {
             opcion = Integer.parseInt(input("\nSeleccione una opcion"));
             if (opcion == 1) {
                 File archivoHabitaciones = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/habitaciones2.txt");
+                        "../Proyecto3/proyecto3_hotel/data/habitaciones2.txt");
                 empleado.cargarHabitaciones(archivoHabitaciones, this.tarifasEstandar, this.tarifasSuite,
                         this.tarifasSuite2, this.habitaciones);
             } else if (opcion == 2) {
@@ -276,11 +284,11 @@ public class Hotel {
                         habitaciones);
             } else if (opcion == 3) {
                 File archivoTarifaEstandar = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa.txt");
+                        "../Proyecto3/proyecto3_hotel/data/tarifa.txt");
                 File archivoTarifaSuite = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa2.txt");
+                        "../Proyecto3/proyecto3_hotel/data/tarifa2.txt");
                 File archivoTarifaSuite2 = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/tarifa3.txt");
+                        "../Proyecto3/proyecto3_hotel/data/tarifa3.txt");
                 empleado.cargarTarifa(archivoTarifaEstandar, this.tarifasEstandar);
                 empleado.cargarTarifa(archivoTarifaSuite, this.tarifasSuite);
                 empleado.cargarTarifa(archivoTarifaSuite2, this.tarifasSuite2);
@@ -289,13 +297,13 @@ public class Hotel {
                 // this.tarifasSuite2);
             } else if (opcion == 5) {
                 File archivoMenu = new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/menu.txt");
+                        "../Proyecto3/proyecto3_hotel/data/menu.txt");
                 empleado.cargarMenu(archivoMenu, platos);
             } else if (opcion == 6) {
-                String nombrePlato = input("Ingrese el nombre del plato a modificar");
-                int opcion2 = Integer.parseInt(input(
-                        "Que desea modificar? (NombrePlato: 1 NombreBebida: 2 Precio: 3 RangoHora: 4  Ubicacion:5)"));
-                String mod = input("Ingrese la modificacion");
+                // String nombrePlato = input("Ingrese el nombre del plato a modificar");
+                // int opcion2 = Integer.parseInt(input(
+                //         "Que desea modificar? (NombrePlato: 1 NombreBebida: 2 Precio: 3 RangoHora: 4  Ubicacion:5)"));
+                // String mod = input("Ingrese la modificacion");
                 // empleado.configurarPlato(nombrePlato, opcion2, mod, this.platos);
             } else if (opcion == 7) {
                 logOut();
@@ -309,7 +317,7 @@ public class Hotel {
         System.out.println("Cargando DataBase de Usuarios");
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File(
-                    "../Proyecto2/entrega2/proyecto2_hotel/data/database.txt")));
+                    "../Proyecto3/proyecto3_hotel/data/database.txt")));
             // "../proyecto2/entrega2/proyecto2_hotel/data/database.txt"
             String linea;
             linea = br.readLine();
@@ -331,7 +339,7 @@ public class Hotel {
     private void cargarHabitaciones() {
         try {
             BufferedReader br = new BufferedReader(
-                    new FileReader(new File("../Proyecto2/entrega2/proyecto2_hotel/data/habitaciones.txt")));
+                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/habitaciones.txt")));
             String linea;
             linea = br.readLine();
             while (linea != null) {
@@ -362,18 +370,32 @@ public class Hotel {
                 boolean cocina = Boolean.valueOf(partes[7]);
                 String estado = partes[8];
 
+                int m2= Integer.valueOf(partes[9]);
+                boolean aireAcondicionado= Boolean.valueOf(partes[10]);
+                boolean calefaccion= Boolean.valueOf(partes[11]);
+                boolean tv= Boolean.valueOf(partes[12]);
+                boolean cafetera= Boolean.valueOf(partes[13]);
+                boolean ropaCama= Boolean.valueOf(partes[14]);
+                boolean plancha= Boolean.valueOf(partes[15]);
+                boolean secador= Boolean.valueOf(partes[16]);
+                int voltaje= Integer.valueOf(partes[17]);
+                boolean usba= Boolean.valueOf(partes[18]);
+                boolean usbc= Boolean.valueOf(partes[19]);
+                boolean desayuno= Boolean.valueOf(partes[20]);
+
+
                 Habitacion habi_nueva;
 
                 if (habitaciones.get(numero) == null) {
                     if (tipo == 1) {
                         habi_nueva = new Estandar(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
-                                tarifasEstandar, estado);
+                        tarifasEstandar, estado, m2,aireAcondicionado,calefaccion,tv,cafetera,ropaCama,plancha,secador,voltaje,usba,usbc,desayuno );
                     } else if (tipo == 2) {
                         habi_nueva = new Suite(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
-                                tarifasSuite, estado);
+                        tarifasSuite, estado, m2,aireAcondicionado,calefaccion,tv,cafetera,ropaCama,plancha,secador,voltaje,usba,usbc,desayuno);
                     } else {
                         habi_nueva = new Suite_doble(numero, ubicacion, capacidad, vista, balcon, cocina,
-                                camas_habitacion, tarifasSuite2, estado);
+                        camas_habitacion, tarifasSuite2, estado, m2,aireAcondicionado,calefaccion,tv,cafetera,ropaCama,plancha,secador,voltaje,usba,usbc,desayuno);
                     }
                     habitaciones.put(numero, habi_nueva);
                 } else {
@@ -413,7 +435,7 @@ public class Hotel {
     private void cargarPlatos() {
         try {
             BufferedReader br = new BufferedReader(
-                    new FileReader(new File("../Proyecto2/entrega2/proyecto2_hotel/data/menu.txt")));
+                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/menu.txt")));
             String linea;
             linea = br.readLine();
             while (linea != null) {
@@ -443,7 +465,7 @@ public class Hotel {
             String linea;
 
             br = new BufferedReader(new FileReader(new File(
-                    "../Proyecto2/entrega2/proyecto2_hotel/data/hueped.txt")));
+                    "../Proyecto3/proyecto3_hotel/data/hueped.txt")));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -468,7 +490,7 @@ public class Hotel {
         BufferedReader br;
         String linea;
         try {
-            br = new BufferedReader(new FileReader(new File("../Proyecto2/entrega2/proyecto2_hotel/data/reserva.txt")));
+            br = new BufferedReader(new FileReader(new File("../Proyecto3/proyecto3_hotel/data/reserva.txt")));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -498,7 +520,7 @@ public class Hotel {
         String linea;
         try {
             br = new BufferedReader(
-                    new FileReader(new File("../proyecto1/entrega3/proyecto1_hotel/data/servicios.txt")));
+                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/servicios.txt")));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -528,7 +550,7 @@ public class Hotel {
         String linea;
         try {
             br = new BufferedReader(
-                    new FileReader(new File("../Proyecto2/entrega2/proyecto2_hotel/data/consumos.txt")));
+                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/consumos.txt")));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -554,7 +576,7 @@ public class Hotel {
         String linea;
 
         try {
-            br = new BufferedReader(new FileReader(new File("../Proyecto2/entrega2/proyecto2_hotel/data/grupos.txt")));
+            br = new BufferedReader(new FileReader(new File("../Proyecto3/proyecto3_hotel/data/grupos.txt")));
             linea = br.readLine();
             while (linea != null) {
                 ArrayList<Huesped> huespedes_grupo = new ArrayList<>();
@@ -602,7 +624,7 @@ public class Hotel {
 
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/habitaciones.txt")))) {
+                        "../Proyecto3/proyecto3_hotel/data/habitaciones.txt")))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
                 String habitacion = lista.get(k).toString();
@@ -621,7 +643,7 @@ public class Hotel {
 
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/"
+                        "../Proyecto3/proyecto3_hotel/data/"
                                 + archivo)))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
@@ -643,7 +665,7 @@ public class Hotel {
 
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/menu.txt")))) {
+                        "../Proyecto3/proyecto3_hotel/data/menu.txt")))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
                 String plato = lista.get(k).toString();
@@ -662,7 +684,7 @@ public class Hotel {
 
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/hueped.txt")))) {
+                        "../Proyecto3/proyecto3_hotel/data/hueped.txt")))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
                 String info = lista.get(k).toString();
@@ -679,7 +701,7 @@ public class Hotel {
     public void guardarReserva(HashMap<Integer, reserva> lista) {
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/reserva.txt")))) {
+                        "../Proyecto3/proyecto3_hotel/data/reserva.txt")))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
                 String info = lista.get(k).toString();
@@ -696,7 +718,7 @@ public class Hotel {
     public void guardarConsumos(HashMap<Integer, Consumo> lista) {
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/consumos.txt")))) {
+                        "../Proyecto3/proyecto3_hotel/data/consumos.txt")))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
                 String info = lista.get(k).toString();
@@ -714,7 +736,7 @@ public class Hotel {
     public void guardarGrupos(HashMap<Integer, Grupo> lista) {
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto2/entrega2/proyecto2_hotel/data/grupos.txt")))) {
+                        "../Proyecto3/proyecto3_hotel/data/grupos.txt")))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
                 String info = lista.get(k).toString();

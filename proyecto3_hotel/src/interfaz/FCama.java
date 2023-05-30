@@ -75,8 +75,8 @@ public class FCama extends JFrame implements ActionListener{
     
         panel1.add(grilla, BorderLayout.CENTER);
 
-        Component spacer = Box.createHorizontalStrut(250);
-        Component spacer2 = Box.createHorizontalStrut(250);
+        Component spacer = Box.createHorizontalStrut(50);
+        Component spacer2 = Box.createHorizontalStrut(50);
         Component spacer3 = Box.createVerticalStrut(100);
         Component spacer4 = Box.createVerticalStrut(100);
 
