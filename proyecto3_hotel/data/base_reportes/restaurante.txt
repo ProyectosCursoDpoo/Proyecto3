@@ -1,0 +1,6 @@
+Pizza;25000;50
+Pollo frito;12000;30
+Hamburguesa;10000;90
+Sushi;45000;15
+Bistec;18000;40
+Ensalada;30000;100
