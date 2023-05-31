@@ -23,7 +23,7 @@ import logica.TarjetaPayU;
 
 public class FpayU extends JFrame implements ActionListener {
     private double total;
-    private Frecep frecep;
+    // private Frecep frecep;
     private HashMap<String, TarjetaPayU> tarjetas;
     Color fondo = new Color(28, 35, 46);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -129,7 +129,6 @@ public class FpayU extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         if (comando.equals("Volver")) {
-            frecep.setVisible(true);
             this.dispose();
         } else if (comando.equals("Pagar")) {
             String nombre = tNombre.getText();
@@ -144,13 +143,12 @@ public class FpayU extends JFrame implements ActionListener {
                 System.out.println(tarjetas);
                 boolean existe = pasarela.verificarTarjeta(tarjetas, numTarjeta);
                 if (existe) {
-                    boolean pago = pasarela.pagar(tarjetas.get(numTarjeta), total);
+                    boolean pago = pasarela.pagar(total);
                     if (pago) {
                         JOptionPane.showMessageDialog(null, "Pago realizado con exito");
                         this.dispose();
-                        System.exit(0);
                     } else {
-                        JOptionPane.showMessageDialog(null, "No se pudo realizar el pago");
+                        JOptionPane.showMessageDialog(null, "Fondos insuficientes");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "La tarjeta no existe");

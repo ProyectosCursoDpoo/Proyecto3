@@ -1,6 +1,6 @@
 package logica;
 
-public class TarjetaPayU extends Tarjeta {
+public class TarjetaPayU {
     private String nombre;
     private int identificacion;
     private String correo;
@@ -13,7 +13,14 @@ public class TarjetaPayU extends Tarjeta {
     public TarjetaPayU(String nombre, int identificacion, String correo,
             String numTarjeta, int cvv,
             String fechaVencimiento, double saldo) {
-        super(nombre, identificacion, correo, numTarjeta, cvv, fechaVencimiento, saldo);
+        this.nombre = nombre;
+        this.identificacion = identificacion;
+        this.correo = correo;
+        this.numTarjeta = numTarjeta;
+        this.cvv = cvv;
+        this.fechaVencimiento = fechaVencimiento;
+        this.saldo = saldo;
+        System.out.println(saldo);
     }
 
     /**

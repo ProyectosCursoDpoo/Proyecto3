@@ -11,9 +11,14 @@ public class PayU extends PasarelaPago {
     public boolean verificarTarjeta(HashMap<String, TarjetaPayU> tarjetas, String numTarjeta) {
 
         // Verificar que la tarjeta exista en la base de datos de PayU
+        for (Object k : tarjetas.keySet()) {
+            System.out.println(k);
+            TarjetaPayU t = tarjetas.get(k);
+            System.out.println(t.getSaldo());
+        }
         if (tarjetas.containsKey(numTarjeta)) {
             this.card = tarjetas.get(numTarjeta);
-
+            System.out.println(card.getSaldo());
             return true;
         } else {
             return false;
@@ -21,15 +26,15 @@ public class PayU extends PasarelaPago {
 
     }
 
-    public boolean pagar(TarjetaPayU card, double monto) {
+    public boolean pagar(double monto) {
         // Simulación del proceso de pago con PayU
         // Aquí puedes incluir la lógica que desees para simular el proceso de pago con
         // PayU
 
         // Verificar que la tarjeta tenga fondos suficientes para el monto a pagar
         System.out.println(monto);
-        System.out.println(card.getSaldo());
-        if (card.getSaldo() >= monto) {
+        System.out.println(this.card.getSaldo());
+        if (this.card.getSaldo() >= monto) {
             // Restar el monto del saldo de la tarjeta
             card.setSaldo(card.getSaldo() - monto);
 
