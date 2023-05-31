@@ -1,6 +1,6 @@
 package logica;
 
-public class TarjetaPayU {
+public class TarjetaPayU extends Tarjeta {
     private String nombre;
     private int identificacion;
     private String correo;
@@ -20,7 +20,7 @@ public class TarjetaPayU {
         this.cvv = cvv;
         this.fechaVencimiento = fechaVencimiento;
         this.saldo = saldo;
-        System.out.println(saldo);
+        // System.out.println(saldo);
     }
 
     /**

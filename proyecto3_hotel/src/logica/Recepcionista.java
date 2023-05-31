@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import interfaz.Fhabitaciones;
+//import interfaz.Fhabitaciones;
 
 public class Recepcionista extends Empleado {
     private String usuario;
@@ -54,7 +54,7 @@ public class Recepcionista extends Empleado {
         for (Habitacion habitacion : habitacionesRegistradas) {
             if (habitacion instanceof Estandar) {
                 Estandar estandar = (Estandar) habitacion;
-                //estandar.setEstado("OCUPADO");
+                // estandar.setEstado("OCUPADO");
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
                 habitaciones.replace(habitacion.getNumero(), habitacion, estandar);
@@ -70,7 +70,7 @@ public class Recepcionista extends Empleado {
                 Suite suite = (Suite) habitacion;
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
-                //suite.setEstado("OCUPADO");
+                // suite.setEstado("OCUPADO");
                 habitaciones.replace(habitacion.getNumero(), habitacion, suite);
                 while (fecha_ini != fecha_fin) {
                     if (fecha_ini % 100 == 32) {
@@ -83,7 +83,7 @@ public class Recepcionista extends Empleado {
                 Suite_doble suite_doble = (Suite_doble) habitacion;
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
-                //suite_doble.setEstado("OCUPADO");
+                // suite_doble.setEstado("OCUPADO");
                 habitaciones.replace(habitacion.getNumero(), habitacion, suite_doble);
 
                 while (fecha_ini != fecha_fin) {
@@ -144,7 +144,8 @@ public class Recepcionista extends Empleado {
         return habitaciones_disponibles;
     }
 
-    public HashMap<Integer, Habitacion> darCotizacion(String fechaInicio, String fechaFin, HashMap<Integer, Huesped> huespedes,
+    public HashMap<Integer, Habitacion> darCotizacion(String fechaInicio, String fechaFin,
+            HashMap<Integer, Huesped> huespedes,
             HashMap<Integer, Habitacion> habitaciones,
             HashMap<String, Integer> tarifasEstandar, HashMap<String, Integer> tarifasSuite,
             HashMap<String, Integer> tarifasSuiteDoble, Recepcionista recepcionista) {
@@ -152,28 +153,28 @@ public class Recepcionista extends Empleado {
         this.tarifasEstandar = tarifasEstandar;
         this.tarifasSuite = tarifasSuite;
         this.tarifasSuite2 = tarifasSuiteDoble;
-        int habitaciones_disponibles = 0;
+        // int habitaciones_disponibles = 0;
         HashMap<Integer, Habitacion> info_habitaciones_disponibles = new HashMap<Integer, Habitacion>();
         for (Integer k : habitaciones.keySet()) {
             Habitacion habitacion = habitaciones.get(k);
             if (habitacion instanceof Estandar) {
                 Estandar habiEstandar = (Estandar) habitacion;
                 if (habiEstandar.getEstado().equals("DISPONIBLE")) {
-                    habitaciones_disponibles += 1;
+                    // habitaciones_disponibles += 1;
                     info_habitaciones_disponibles.put(k, habiEstandar);
 
                 }
             } else if (habitacion instanceof Suite) {
                 Suite habiSuite = (Suite) habitacion;
                 if (habiSuite.getEstado().equals("DISPONIBLE")) {
-                    habitaciones_disponibles += 1;
+                    // habitaciones_disponibles += 1;
                     info_habitaciones_disponibles.put(k, habiSuite);
 
                 }
             } else if (habitacion instanceof Suite_doble) {
                 Suite_doble habiSuite2 = (Suite_doble) habitacion;
                 if (habiSuite2.getEstado().equals("DISPONIBLE")) {
-                    habitaciones_disponibles += 1;
+                    // habitaciones_disponibles += 1;
                     info_habitaciones_disponibles.put(k, habiSuite2);
 
                 }

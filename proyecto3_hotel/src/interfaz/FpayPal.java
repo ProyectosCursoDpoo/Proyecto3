@@ -17,23 +17,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import logica.PayU;
+import logica.Paypal;
 
-import logica.TarjetaPayU;
+import logica.TarjetaPayPal;
 
-public class FpayU extends JFrame implements ActionListener {
+public class FpayPal extends JFrame implements ActionListener {
     private double total;
     // private Frecep frecep;
-    private HashMap<String, TarjetaPayU> tarjetas;
     private boolean pago;
+    private HashMap<String, TarjetaPayPal> tarjetas;
     Color fondo = new Color(28, 35, 46);
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     JTextField tNombre;
     JTextField tNumTarjeta;
     JTextField tCVV;
     JTextField tfechaVen;
+    JTextField tToken;
 
-    public FpayU(double total, HashMap<String, TarjetaPayU> tarjetas) {
+    public FpayPal(double total, HashMap<String, TarjetaPayPal> tarjetas) {
         this.total = total;
         this.tarjetas = tarjetas;
         inicializar();
@@ -94,6 +95,18 @@ public class FpayU extends JFrame implements ActionListener {
         tfechaVen.setForeground(Color.white);
         tfechaVen.setHorizontalAlignment(JLabel.CENTER);
 
+        JLabel ltoken = new JLabel("Token de seguridad: ");
+        ltoken.setFont(new Font("Georgia", Font.BOLD, 40));
+        ltoken.setBackground(fondo);
+        ltoken.setForeground(Color.white);
+        ltoken.setHorizontalAlignment(JLabel.CENTER);
+
+        this.tToken = new JTextField();
+        tToken.setFont(new Font("Georgia", Font.BOLD, 40));
+        tToken.setBackground(fondo);
+        tToken.setForeground(Color.white);
+        tToken.setHorizontalAlignment(JLabel.CENTER);
+
         panel.add(lNombre);
         panel.add(tNombre);
         panel.add(lNumTarjeta);
@@ -102,6 +115,8 @@ public class FpayU extends JFrame implements ActionListener {
         panel.add(tCVV);
         panel.add(fechaVen);
         panel.add(tfechaVen);
+        panel.add(ltoken);
+        panel.add(tToken);
 
         JPanel panelBotones = new JPanel(new GridLayout(1, 2, 10, 10));
         panelBotones.setBackground(fondo);
@@ -136,27 +151,28 @@ public class FpayU extends JFrame implements ActionListener {
             String numTarjeta = tNumTarjeta.getText();
             String cvv = tCVV.getText();
             String fechaVen = tfechaVen.getText();
-            if (nombre.equals("") || numTarjeta.equals("") || cvv.equals("") || fechaVen.equals("")) {
+            if (nombre.equals("") || numTarjeta.equals("") || cvv.equals("") || fechaVen.equals("")
+                    || tToken.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Por favor llene todos los campos", "Error",
                         JOptionPane.ERROR_MESSAGE);
             } else {
-                PayU pasarela = new PayU();
-                System.out.println(tarjetas);
+                Paypal pasarela = new Paypal();
+                // System.out.println(tarjetas);
                 boolean existe = pasarela.verificarTarjeta(tarjetas, numTarjeta);
                 if (existe) {
-                    boolean pago = pasarela.pagar(total);
+                    boolean pago = pasarela.pagar(total, tToken.getText());
                     if (pago) {
                         JOptionPane.showMessageDialog(null, "Pago realizado con exito");
-                        setPago(true);
+                        this.setPago(true);
                         this.dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Fondos insuficientes");
-                        setPago(false);
+                        JOptionPane.showMessageDialog(null, "No se pudo hacer el pago");
+                        this.setPago(false);
                         this.dispose();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "La tarjeta no existe");
-                    setPago(false);
+                    this.setPago(false);
                     this.dispose();
                 }
             }
@@ -179,20 +195,6 @@ public class FpayU extends JFrame implements ActionListener {
     }
 
     /**
-     * @return HashMap<String, TarjetaPayU> return the tarjetas
-     */
-    public HashMap<String, TarjetaPayU> getTarjetas() {
-        return tarjetas;
-    }
-
-    /**
-     * @param tarjetas the tarjetas to set
-     */
-    public void setTarjetas(HashMap<String, TarjetaPayU> tarjetas) {
-        this.tarjetas = tarjetas;
-    }
-
-    /**
      * @return boolean return the pago
      */
     public boolean isPago() {
@@ -204,6 +206,20 @@ public class FpayU extends JFrame implements ActionListener {
      */
     public void setPago(boolean pago) {
         this.pago = pago;
+    }
+
+    /**
+     * @return HashMap<String, TarjetaPayPal> return the tarjetas
+     */
+    public HashMap<String, TarjetaPayPal> getTarjetas() {
+        return tarjetas;
+    }
+
+    /**
+     * @param tarjetas the tarjetas to set
+     */
+    public void setTarjetas(HashMap<String, TarjetaPayPal> tarjetas) {
+        this.tarjetas = tarjetas;
     }
 
 }
