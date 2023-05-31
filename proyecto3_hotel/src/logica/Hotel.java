@@ -609,6 +609,7 @@ public class Hotel {
                 int saldo = Integer.parseInt(partes[7]);
 
                 if (plataforma == "payU") {
+                    System.out.println("entro");
                     TarjetaPayU tarjeta = new TarjetaPayU(nombre, id, correo, numTarjeta, cvv, fechaVencimiento, saldo);
                     tarjetasPayU.put(numTarjeta, tarjeta);
                 }
@@ -668,7 +669,7 @@ public class Hotel {
 
     // TODO: cargar factura
 
-    public void guardarDatabase(HashMap<String, String> lista){
+    public void guardarDatabase(HashMap<String, String> lista) {
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
                         "../Proyecto3/proyecto3_hotel/data/database.txt")))) {
