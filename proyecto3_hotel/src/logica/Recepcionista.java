@@ -1,7 +1,14 @@
 package logica;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 import interfaz.Fhabitaciones;
 
@@ -14,6 +21,7 @@ public class Recepcionista extends Empleado {
     public HashMap<String, Integer> tarifasSuite = new HashMap<>();
     public HashMap<String, Integer> tarifasSuite2 = new HashMap<>();
     private int tarifaReserva;
+    private double total;
 
     // Recepcionista viejo
     /*
@@ -256,9 +264,10 @@ public class Recepcionista extends Empleado {
     }
 
     public void guardarFactura(Integer numero_reserva, String factura) {
+        // "../Proyecto3/proyecto3_hotel/data/tarifa.txt"
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../PROYECTO2/entrega2/proyecto2_hotel/data/facturas/reserva" + String.valueOf(numero_reserva)
+                        "../Proyecto3/proyecto3_hotel/data/facturas/reserva" + String.valueOf(numero_reserva)
                                 + ".txt")))) {
 
             bw.write(factura);
@@ -360,7 +369,7 @@ public class Recepcionista extends Empleado {
         // }
         factura += "\t ---Los consumos adicionales son:--- \n";
         factura += info_consumo;
-
+        this.total = total;
         factura += String.format("El precio total de la factura es: %.1f pesos colombianos \n", total);
         factura += "Gracias por reservar con nostros! \n";
         return factura;
@@ -417,6 +426,27 @@ public class Recepcionista extends Empleado {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    /**
+     * @param tarifaReserva the tarifaReserva to set
+     */
+    public void setTarifaReserva(int tarifaReserva) {
+        this.tarifaReserva = tarifaReserva;
+    }
+
+    /**
+     * @return int return the total
+     */
+    public double getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(int total) {
+        this.total = total;
     }
 
 }
