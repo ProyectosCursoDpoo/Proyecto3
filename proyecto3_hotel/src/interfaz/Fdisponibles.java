@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+//import java.util.Set;
 
 import logica.*;
 
@@ -15,7 +15,7 @@ public class Fdisponibles extends JPanel implements ActionListener {
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private HashMap<Integer, Habitacion> habitaciones;
     private JPanel panel;
-    private Hotel hotel;
+    // private Hotel hotel;
     private FHuesped fHuesped;
 
     public Fdisponibles(HashMap<Integer, Habitacion> habitaciones) {
@@ -104,9 +104,7 @@ public class Fdisponibles extends JPanel implements ActionListener {
         if (comando.equals("volver")) {
             setVisible(false);
             fHuesped.setVisible(true);
-        } 
+        }
 
     }
 }
-           
-

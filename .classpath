@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="proyecto3_hotel/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/luisf/OneDrive - Universidad de los Andes/Universidad/3ro/dpoo/proyecto3/Proyecto3/proyecto3_hotel/lib/itextpdf-5.3.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luisf/OneDrive - Universidad de los Andes/Universidad/3ro/dpoo/proyecto3/Proyecto3/proyecto3_hotel/lib/jcommon-1.0.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luisf/OneDrive - Universidad de los Andes/Universidad/3ro/dpoo/proyecto3/Proyecto3/proyecto3_hotel/lib/jfreechart-1.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luisf/OneDrive - Universidad de los Andes/Universidad/3ro/dpoo/proyecto3/Proyecto3/proyecto3_hotel/lib/pdfbox-3.0.0-alpha3.jar"/>
 	<classpathentry kind="output" path="proyecto3_hotel/bin"/>
 </classpath>

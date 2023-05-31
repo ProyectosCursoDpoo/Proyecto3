@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
+//import java.util.Set;
 
 import logica.*;
 
@@ -36,7 +36,7 @@ public class FHuesped extends JPanel implements ActionListener {
 
         JPanel info = new JPanel(new GridLayout(3, 3, 10, 10));
         info.setBackground(fondo);
-        
+
         JLabel labelLlegada = new JLabel("Fecha de inicio");
         labelLlegada.setFont(new Font("Georgia", Font.BOLD, 18));
         labelLlegada.setForeground(Color.WHITE);
@@ -56,7 +56,7 @@ public class FHuesped extends JPanel implements ActionListener {
         labelSalida.setHorizontalAlignment(JLabel.CENTER);
         labelSalida.setOpaque(true);
         labelSalida.setBackground(fondo);
-        
+
         fechaFin = new JTextField();
         fechaFin.setFont(new Font("Georgia", Font.BOLD, 18));
         fechaFin.setBackground(fondo);
@@ -137,7 +137,8 @@ public class FHuesped extends JPanel implements ActionListener {
                 HashMap<String, Integer> tarifasEstandar = hotel.getTarifasEstandar();
                 HashMap<String, Integer> tarifasSuite = hotel.getTarifasSuite();
                 HashMap<String, Integer> tarifasSuite2 = hotel.getTarifasSuite2();
-                HashMap<Integer, Habitacion> info_habitaciones_disponibles = recepcionista.darCotizacion(llegada, salida, huespedes, habitaciones, tarifasEstandar, tarifasSuite,
+                HashMap<Integer, Habitacion> info_habitaciones_disponibles = recepcionista.darCotizacion(llegada,
+                        salida, huespedes, habitaciones, tarifasEstandar, tarifasSuite,
                         tarifasSuite2, recepcionista);
 
                 Fdisponibles ventaHabitaciones = new Fdisponibles(info_habitaciones_disponibles);
@@ -148,14 +149,12 @@ public class FHuesped extends JPanel implements ActionListener {
             }
         } else if (comando.equals("volver")) {
             principal.setVisible(true);
-        } else if (comando.equals("Iniciar Reserva")){
+        } else if (comando.equals("Iniciar Reserva")) {
             setVisible(false);
             FregistrarHuesped registro = new FregistrarHuesped(this, hotel);
             registro.setVisible(true);
         }
 
-    } 
-    
+    }
+
 }
-
-
