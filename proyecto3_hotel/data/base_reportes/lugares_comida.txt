@@ -1,0 +1,3 @@
+Habitacion;170
+Restaurante;450
+Piscina;100

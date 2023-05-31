@@ -78,14 +78,25 @@ public class FAdmin extends JPanel implements ActionListener{
         boton6.addActionListener(this);
         boton6.setActionCommand("Configurar Plato");
 
-        JPanel grilla = new JPanel(new GridLayout(2, 3, 100, 150));
+        JButton boton7 = new JButton("Generar Reportes");
+        //boton6.setBackground(fondo);
+        boton7.setForeground(fondo);
+        boton7.setFont(boton1.getFont().deriveFont(18f));
+        boton7.setPreferredSize(new Dimension(50, 10));
+        boton7.setHorizontalAlignment(JLabel.CENTER);
+        boton7.addActionListener(this);
+        boton7.setActionCommand("Generar Reporte");
+
+        JPanel grilla = new JPanel(new GridLayout(2, 4, 100, 150));
         grilla.setBackground(fondo);
         grilla.add(boton1);
         grilla.add(boton2);
         grilla.add(boton3);
+        grilla.add(boton7);
         grilla.add(boton4);
         grilla.add(boton5);
         grilla.add(boton6);
+        
 
         panel1.add(grilla, BorderLayout.CENTER);
 
@@ -169,6 +180,12 @@ public class FAdmin extends JPanel implements ActionListener{
         else if (comando.equals("Salir")){
             this.setVisible(false);
             this.principal.hotel.logOut();
+        }
+        else if (comando.equals("Generar Reporte")){
+            this.admin.generarReportesEdades();
+            this.admin.generarReportesFacturas();
+            this.admin.generarReportesRestaurante();
+            JOptionPane.showMessageDialog(this, "Reportes Generados Exitosamente, los puedes encontrar en la carpeta Data/Reportes_PDF", "Reportes Generados", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 

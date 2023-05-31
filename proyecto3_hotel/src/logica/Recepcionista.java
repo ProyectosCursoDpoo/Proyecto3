@@ -144,7 +144,7 @@ public class Recepcionista extends Empleado {
         return habitaciones_disponibles;
     }
 
-    public void darCotizacion(String fechaInicio, String fechaFin, HashMap<Integer, Huesped> huespedes,
+    public HashMap<Integer, Habitacion> darCotizacion(String fechaInicio, String fechaFin, HashMap<Integer, Huesped> huespedes,
             HashMap<Integer, Habitacion> habitaciones,
             HashMap<String, Integer> tarifasEstandar, HashMap<String, Integer> tarifasSuite,
             HashMap<String, Integer> tarifasSuiteDoble, Recepcionista recepcionista) {
@@ -179,17 +179,7 @@ public class Recepcionista extends Empleado {
                 }
             }
         }
-        if (habitaciones_disponibles > 0) {
-            Fhabitaciones ventaHabitaciones = new Fhabitaciones(info_habitaciones_disponibles, fechaInicio, fechaFin,
-                    recepcionista);
-            ventaHabitaciones.setVisible(true);
-        } else {
-            System.out.println("Lo sentimos no tenemos habitaciones disponibles en este momento");
-            Fhabitaciones ventaHabitaciones = new Fhabitaciones(info_habitaciones_disponibles, fechaInicio, fechaFin,
-                    recepcionista);
-            ventaHabitaciones.setVisible(true);
-
-        }
+        return info_habitaciones_disponibles;
 
     }
 
