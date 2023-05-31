@@ -54,7 +54,7 @@ public class Recepcionista extends Empleado {
         for (Habitacion habitacion : habitacionesRegistradas) {
             if (habitacion instanceof Estandar) {
                 Estandar estandar = (Estandar) habitacion;
-                estandar.setEstado("OCUPADO");
+                //estandar.setEstado("OCUPADO");
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
                 habitaciones.replace(habitacion.getNumero(), habitacion, estandar);
@@ -70,7 +70,7 @@ public class Recepcionista extends Empleado {
                 Suite suite = (Suite) habitacion;
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
-                suite.setEstado("OCUPADO");
+                //suite.setEstado("OCUPADO");
                 habitaciones.replace(habitacion.getNumero(), habitacion, suite);
                 while (fecha_ini != fecha_fin) {
                     if (fecha_ini % 100 == 32) {
@@ -83,7 +83,7 @@ public class Recepcionista extends Empleado {
                 Suite_doble suite_doble = (Suite_doble) habitacion;
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
-                suite_doble.setEstado("OCUPADO");
+                //suite_doble.setEstado("OCUPADO");
                 habitaciones.replace(habitacion.getNumero(), habitacion, suite_doble);
 
                 while (fecha_ini != fecha_fin) {
