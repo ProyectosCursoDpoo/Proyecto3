@@ -183,8 +183,10 @@ public class FAdmin extends JPanel implements ActionListener{
         }
         else if (comando.equals("Generar Reporte")){
             this.admin.generarReportesEdades();
-            this.admin.generarReportesFacturas();
+            this.admin.generarReportesTarifasHabitaciones();
             this.admin.generarReportesRestaurante();
+            this.admin.generarReportesFacturas();
+            this.admin.generarReportesServicios();
             JOptionPane.showMessageDialog(this, "Reportes Generados Exitosamente, los puedes encontrar en la carpeta Data/Reportes_PDF", "Reportes Generados", JOptionPane.INFORMATION_MESSAGE);
         }
     }
