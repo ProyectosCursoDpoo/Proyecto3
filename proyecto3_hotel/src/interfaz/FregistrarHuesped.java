@@ -16,10 +16,9 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
     JPanel contentP;
     JLabel hab, fech, hues;
     int numHues = 0;
-    public ArrayList<Huesped> huespedes;
+    public ArrayList<Huesped> huespedesRegistrados;
     private JTextField txtNombre, txtIdentificacion, txtCorreo, txtTelefono, txtFechaNacimiento, txtFechaInicio, txtFechaSalida;
-    private ArrayList<Huesped> huespedesRegistrados;
-    private ArrayList<Habitacion> habitacionesRegistradas;
+    private ArrayList<Habitacion> habitacionesRegistradas = new ArrayList<>();
     private String fechaLlegada, fechaSalida;
 
     public FregistrarHuesped(FHuesped fPrincipal, Hotel hotel) {
@@ -118,12 +117,20 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 String seleccion = (String) cbHabitacion.getSelectedItem();
                 if (seleccion != null) {
+                    HashMap<Integer, Habitacion> habitacionesDis = recepcionista.habitaciones_disponibles(habitaciones);
+
                     if (seleccion.equals("Habitación 1")) {
                         hab.setText("1201");
+                        Habitacion habitacionEscogida = habitacionesDis.get(1201);
+                        habitacionesRegistradas.add(habitacionEscogida);
                     } else if (seleccion.equals("Habitación 2")) {
                         hab.setText("101");
+                        Habitacion habitacionEscogida = habitacionesDis.get(101);
+                        habitacionesRegistradas.add(habitacionEscogida);
                     } else if (seleccion.equals("Habitación 3")) {
                         hab.setText("301");
+                        Habitacion habitacionEscogida = habitacionesDis.get(301);
+                        habitacionesRegistradas.add(habitacionEscogida);
                     }
                 }
             }
@@ -257,7 +264,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             datos.put("fechaNacimiento", fechaNacimiento);
             Huesped huesped = new Huesped(nombre, Integer.parseInt(identificacion), correo, telefono,
                     fechaNacimiento);
-            huespedes.add(huesped);
+            huespedesRegistrados.add(huesped);
            
         } else if (comando.equals("TERMINAR")) {
             System.out.println("xd");
@@ -272,11 +279,11 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             HashMap<Integer, Grupo> grupos = hotel.getGrupos();
             HashMap<Integer, Habitacion> habitaciones = hotel.getHabitaciones();
 
-            //recepcionista.iniciarReserva(huespedes, reservas, habitaciones,
-            //        recepcionista, tarifasEstandar,
-            //        tarifasSuite,
-            //        tarifasSuite2, grupos, habitacionesRegistradas, huespedesRegistrados, fechaLlegada,
-            //        fechaSalida, hotel);
+            recepcionista.iniciarReserva(huespedes, reservas, habitaciones,
+                   recepcionista, tarifasEstandar,
+                   tarifasSuite,
+                    tarifasSuite2, grupos, habitacionesRegistradas, huespedesRegistrados, fechaLlegada,
+                    fechaSalida, hotel);
             
             JOptionPane.showMessageDialog(null, "Reserva creada con exito", "Exito",
                     JOptionPane.INFORMATION_MESSAGE);
