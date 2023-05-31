@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.*;
 import java.util.*;
 
-
 public class Hotel {
 
     public HashMap<Integer, Habitacion> habitaciones = new HashMap<>();
@@ -22,6 +21,9 @@ public class Hotel {
     public HashMap<String, Integer> tarifasSuite2 = new HashMap<>();
     public HashMap<Integer, Grupo> grupos = new HashMap<>();
     public HashMap<Integer, Consumo> consumos = new HashMap<>();
+    public HashMap<String, TarjetaPayU> tarjetasPayU = new HashMap<>();
+    public HashMap<String, Tarjeta> tarjetasPayPal = new HashMap<>();
+    public HashMap<String, Tarjeta> tarjetasApplePay = new HashMap<>();
 
     public boolean parking_gratis = true;
     public boolean piscina = true;
@@ -59,6 +61,8 @@ public class Hotel {
 
             cargarConsumos();
 
+            cargarTarjetas();
+
             // System.out.println(this.database);
             // System.out.println(this.tarifasEstandar);
             // System.out.println(this.tarifasSuite);
@@ -73,6 +77,10 @@ public class Hotel {
             e.printStackTrace();
         }
 
+    }
+
+    public HashMap<String, TarjetaPayU> getTarjetasPayU() {
+        return this.tarjetasPayU;
     }
 
     public HashMap<Integer, Huesped> getHuespedes() {
@@ -303,7 +311,8 @@ public class Hotel {
             } else if (opcion == 6) {
                 // String nombrePlato = input("Ingrese el nombre del plato a modificar");
                 // int opcion2 = Integer.parseInt(input(
-                //         "Que desea modificar? (NombrePlato: 1 NombreBebida: 2 Precio: 3 RangoHora: 4  Ubicacion:5)"));
+                // "Que desea modificar? (NombrePlato: 1 NombreBebida: 2 Precio: 3 RangoHora: 4
+                // Ubicacion:5)"));
                 // String mod = input("Ingrese la modificacion");
                 // empleado.configurarPlato(nombrePlato, opcion2, mod, this.platos);
             } else if (opcion == 7) {
@@ -378,32 +387,34 @@ public class Hotel {
                 boolean cocina = Boolean.valueOf(partes[7]);
                 String estado = partes[8];
 
-                int m2= Integer.valueOf(partes[9]);
-                boolean aireAcondicionado= Boolean.valueOf(partes[10]);
-                boolean calefaccion= Boolean.valueOf(partes[11]);
-                boolean tv= Boolean.valueOf(partes[12]);
-                boolean cafetera= Boolean.valueOf(partes[13]);
-                boolean ropaCama= Boolean.valueOf(partes[14]);
-                boolean plancha= Boolean.valueOf(partes[15]);
-                boolean secador= Boolean.valueOf(partes[16]);
-                int voltaje= Integer.valueOf(partes[17]);
-                boolean usba= Boolean.valueOf(partes[18]);
-                boolean usbc= Boolean.valueOf(partes[19]);
-                boolean desayuno= Boolean.valueOf(partes[20]);
-
+                int m2 = Integer.valueOf(partes[9]);
+                boolean aireAcondicionado = Boolean.valueOf(partes[10]);
+                boolean calefaccion = Boolean.valueOf(partes[11]);
+                boolean tv = Boolean.valueOf(partes[12]);
+                boolean cafetera = Boolean.valueOf(partes[13]);
+                boolean ropaCama = Boolean.valueOf(partes[14]);
+                boolean plancha = Boolean.valueOf(partes[15]);
+                boolean secador = Boolean.valueOf(partes[16]);
+                int voltaje = Integer.valueOf(partes[17]);
+                boolean usba = Boolean.valueOf(partes[18]);
+                boolean usbc = Boolean.valueOf(partes[19]);
+                boolean desayuno = Boolean.valueOf(partes[20]);
 
                 Habitacion habi_nueva;
 
                 if (habitaciones.get(numero) == null) {
                     if (tipo == 1) {
                         habi_nueva = new Estandar(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
-                        tarifasEstandar, estado, m2,aireAcondicionado,calefaccion,tv,cafetera,ropaCama,plancha,secador,voltaje,usba,usbc,desayuno );
+                                tarifasEstandar, estado, m2, aireAcondicionado, calefaccion, tv, cafetera, ropaCama,
+                                plancha, secador, voltaje, usba, usbc, desayuno);
                     } else if (tipo == 2) {
                         habi_nueva = new Suite(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
-                        tarifasSuite, estado, m2,aireAcondicionado,calefaccion,tv,cafetera,ropaCama,plancha,secador,voltaje,usba,usbc,desayuno);
+                                tarifasSuite, estado, m2, aireAcondicionado, calefaccion, tv, cafetera, ropaCama,
+                                plancha, secador, voltaje, usba, usbc, desayuno);
                     } else {
                         habi_nueva = new Suite_doble(numero, ubicacion, capacidad, vista, balcon, cocina,
-                        camas_habitacion, tarifasSuite2, estado, m2,aireAcondicionado,calefaccion,tv,cafetera,ropaCama,plancha,secador,voltaje,usba,usbc,desayuno);
+                                camas_habitacion, tarifasSuite2, estado, m2, aireAcondicionado, calefaccion, tv,
+                                cafetera, ropaCama, plancha, secador, voltaje, usba, usbc, desayuno);
                     }
                     habitaciones.put(numero, habi_nueva);
                 } else {
@@ -579,6 +590,34 @@ public class Hotel {
         }
     }
 
+    private void cargarTarjetas() {
+        BufferedReader br;
+        String linea;
+        try {
+            br = new BufferedReader(
+                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/infoTarjetas.txt")));
+            linea = br.readLine();
+            while (linea != null) {
+                String[] partes = linea.split(";");
+                String plataforma = partes[0];
+                String nombre = partes[1];
+                int id = Integer.parseInt(partes[2]);
+                String correo = partes[3];
+                String numTarjeta = partes[4];
+                int cvv = Integer.parseInt(partes[5]);
+                String fechaVencimiento = partes[6];
+                Double saldo = Double.parseDouble(partes[7]);
+                if (plataforma.equals("payU")) {
+                    TarjetaPayU tarjeta = new TarjetaPayU(nombre, id, correo, numTarjeta, cvv, fechaVencimiento, saldo);
+                    tarjetasPayU.put(numTarjeta, tarjeta);
+                }
+
+                linea = br.readLine();
+            }
+        } catch (IOException e) {
+        }
+    }
+
     private void cargarGrupos() {
         BufferedReader br;
         String linea;
@@ -628,7 +667,7 @@ public class Hotel {
 
     // TODO: cargar factura
 
-    public void guardarDatabase(HashMap<String, String> lista){
+    public void guardarDatabase(HashMap<String, String> lista) {
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
                         "../Proyecto3/proyecto3_hotel/data/database.txt")))) {
