@@ -29,6 +29,7 @@ public class FfacturaReserva extends JFrame implements ActionListener {
     JPanel panelFactura;
     JTextArea areaTexto;
     JScrollPane scrollPane;
+    double total;
     private int id;
     private Hotel hotel;
 
@@ -88,6 +89,7 @@ public class FfacturaReserva extends JFrame implements ActionListener {
         HashMap<Integer, Habitacion> habitaciones = hotel.getHabitaciones();
         HashMap<Integer, Grupo> grupos = hotel.getGrupos();
         String info = recepcionista.registrarSalida(id, reservas, staff, consumos, habitaciones, this.hotel, grupos);
+        this.total = recepcionista.getTotal();
 
         scrollPane = new JScrollPane();
         scrollPane.setBounds(10, 11, 414, 400);
@@ -108,11 +110,17 @@ public class FfacturaReserva extends JFrame implements ActionListener {
         if (comando.equals("volver")) {
             this.dispose();
         } else if (comando.equals("pagar")) {
-            JOptionPane.showMessageDialog(this, "¿Desea pagar la factura?", "Pagar", JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(this, "Factura pagada");
-            hotel.logOut();
-            this.dispose();
-        }
-    }
+            String opc = JOptionPane.showInputDialog(
+                    "1. Pasarele de pago Payu\n2. Pasarele de pago Paypal\n3. Pasarele de pago ApplePay", "1");
+            if (opc.equals("1")) {
+                HashMap<String, TarjetaPayU> tarjetasPayU = hotel.getTarjetasPayU();
+                FpayU payu = new FpayU(this.total, tarjetasPayU);
+                payu.setVisible(true);
 
+                hotel.logOut();
+                this.dispose();
+            }
+        }
+
+    }
 }

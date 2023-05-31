@@ -1,7 +1,14 @@
 package logica;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 import interfaz.Fhabitaciones;
 
@@ -14,6 +21,7 @@ public class Recepcionista extends Empleado {
     public HashMap<String, Integer> tarifasSuite = new HashMap<>();
     public HashMap<String, Integer> tarifasSuite2 = new HashMap<>();
     private int tarifaReserva;
+    private double total;
 
     // Recepcionista viejo
     /*
@@ -46,7 +54,7 @@ public class Recepcionista extends Empleado {
         for (Habitacion habitacion : habitacionesRegistradas) {
             if (habitacion instanceof Estandar) {
                 Estandar estandar = (Estandar) habitacion;
-                estandar.setEstado("OCUPADO");
+                //estandar.setEstado("OCUPADO");
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
                 habitaciones.replace(habitacion.getNumero(), habitacion, estandar);
@@ -62,7 +70,7 @@ public class Recepcionista extends Empleado {
                 Suite suite = (Suite) habitacion;
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
-                suite.setEstado("OCUPADO");
+                //suite.setEstado("OCUPADO");
                 habitaciones.replace(habitacion.getNumero(), habitacion, suite);
                 while (fecha_ini != fecha_fin) {
                     if (fecha_ini % 100 == 32) {
@@ -75,7 +83,7 @@ public class Recepcionista extends Empleado {
                 Suite_doble suite_doble = (Suite_doble) habitacion;
                 int fecha_ini = Integer.parseInt(f_inicial);
                 int fecha_fin = Integer.parseInt(finalf);
-                suite_doble.setEstado("OCUPADO");
+                //suite_doble.setEstado("OCUPADO");
                 habitaciones.replace(habitacion.getNumero(), habitacion, suite_doble);
 
                 while (fecha_ini != fecha_fin) {
@@ -136,7 +144,7 @@ public class Recepcionista extends Empleado {
         return habitaciones_disponibles;
     }
 
-    public void darCotizacion(String fechaInicio, String fechaFin, HashMap<Integer, Huesped> huespedes,
+    public HashMap<Integer, Habitacion> darCotizacion(String fechaInicio, String fechaFin, HashMap<Integer, Huesped> huespedes,
             HashMap<Integer, Habitacion> habitaciones,
             HashMap<String, Integer> tarifasEstandar, HashMap<String, Integer> tarifasSuite,
             HashMap<String, Integer> tarifasSuiteDoble, Recepcionista recepcionista) {
@@ -171,17 +179,7 @@ public class Recepcionista extends Empleado {
                 }
             }
         }
-        if (habitaciones_disponibles > 0) {
-            Fhabitaciones ventaHabitaciones = new Fhabitaciones(info_habitaciones_disponibles, fechaInicio, fechaFin,
-                    recepcionista);
-            ventaHabitaciones.setVisible(true);
-        } else {
-            System.out.println("Lo sentimos no tenemos habitaciones disponibles en este momento");
-            Fhabitaciones ventaHabitaciones = new Fhabitaciones(info_habitaciones_disponibles, fechaInicio, fechaFin,
-                    recepcionista);
-            ventaHabitaciones.setVisible(true);
-
-        }
+        return info_habitaciones_disponibles;
 
     }
 
@@ -256,9 +254,10 @@ public class Recepcionista extends Empleado {
     }
 
     public void guardarFactura(Integer numero_reserva, String factura) {
+        // "../Proyecto3/proyecto3_hotel/data/tarifa.txt"
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../PROYECTO2/entrega2/proyecto2_hotel/data/facturas/reserva" + String.valueOf(numero_reserva)
+                        "../Proyecto3/proyecto3_hotel/data/facturas/reserva" + String.valueOf(numero_reserva)
                                 + ".txt")))) {
 
             bw.write(factura);
@@ -360,7 +359,7 @@ public class Recepcionista extends Empleado {
         // }
         factura += "\t ---Los consumos adicionales son:--- \n";
         factura += info_consumo;
-
+        this.total = total;
         factura += String.format("El precio total de la factura es: %.1f pesos colombianos \n", total);
         factura += "Gracias por reservar con nostros! \n";
         return factura;
@@ -417,6 +416,27 @@ public class Recepcionista extends Empleado {
         } catch (IOException e) {
             return null;
         }
+    }
+
+    /**
+     * @param tarifaReserva the tarifaReserva to set
+     */
+    public void setTarifaReserva(int tarifaReserva) {
+        this.tarifaReserva = tarifaReserva;
+    }
+
+    /**
+     * @return int return the total
+     */
+    public double getTotal() {
+        return total;
+    }
+
+    /**
+     * @param total the total to set
+     */
+    public void setTotal(int total) {
+        this.total = total;
     }
 
 }
