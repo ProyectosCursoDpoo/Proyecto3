@@ -12,7 +12,7 @@ public class PayU extends PasarelaPago {
 
         // Verificar que la tarjeta exista en la base de datos de PayU
         if (tarjetas.containsKey(numTarjeta)) {
-            card = tarjetas.get(numTarjeta);
+            this.card = tarjetas.get(numTarjeta);
 
             return true;
         } else {
@@ -27,6 +27,8 @@ public class PayU extends PasarelaPago {
         // PayU
 
         // Verificar que la tarjeta tenga fondos suficientes para el monto a pagar
+        System.out.println(monto);
+        System.out.println(card.getSaldo());
         if (card.getSaldo() >= monto) {
             // Restar el monto del saldo de la tarjeta
             card.setSaldo(card.getSaldo() - monto);

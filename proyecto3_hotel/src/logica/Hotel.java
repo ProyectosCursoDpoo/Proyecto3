@@ -608,8 +608,7 @@ public class Hotel {
                 String fechaVencimiento = partes[6];
                 int saldo = Integer.parseInt(partes[7]);
 
-                if (plataforma == "payU") {
-                    System.out.println("entro");
+                if (plataforma.equals("payU")) {
                     TarjetaPayU tarjeta = new TarjetaPayU(nombre, id, correo, numTarjeta, cvv, fechaVencimiento, saldo);
                     tarjetasPayU.put(numTarjeta, tarjeta);
                 }
