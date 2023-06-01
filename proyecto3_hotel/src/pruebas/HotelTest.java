@@ -16,7 +16,7 @@ import logica.Hotel;
 
 public class HotelTest {
     private Hotel hotel;
-    
+
     @BeforeEach
     public void setUp() throws Exception {
         hotel = new Hotel();
@@ -48,41 +48,41 @@ public class HotelTest {
         hotel.cargarDatabase();
         assertEquals(10, hotel.getDatabase().size());
     }
-    
+
     @Test
     public void cargarDatabase_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/database.txt";
         hotel.setFileDataBase(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarDatabase();
         });
     }
-    
+
     @Test
     public void cargarTarifa_ValidFile_Test() throws FileNotFoundException, IOException {
         HashMap<String, Integer> tarifa = new HashMap<>();
         assertEquals(0, tarifa.size());
-    
-        File archivo = new File("../Proyecto3/proyecto3_hotel/data/tarifa2.txt");    
+
+        File archivo = new File("../Proyecto3/proyecto3_hotel/data/tarifa2.txt");
         hotel.cargarTarifa(archivo, tarifa);
         assertEquals(361, tarifa.size());
     }
-    
+
     @Test
     public void cargarTarifa_FileNotFoundException_Test() {
         HashMap<String, Integer> tarifa = new HashMap<>();
         assertEquals(0, tarifa.size());
-    
+
         // Modificamos la ruta del archivo para que no exista
         File archivo = new File("ruta/inexistente/tarifas.txt");
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarTarifa(archivo, tarifa);
         });
-    
+
         assertEquals(0, tarifa.size());
     }
-    
+
     @Test
     public void cargarPlatos_ValidFile_Test() throws FileNotFoundException, IOException {
         assertEquals(0, hotel.getPlatos().size());
@@ -91,19 +91,19 @@ public class HotelTest {
         });
         assertEquals(9, hotel.getPlatos().size());
     }
-    
+
     @Test
     public void cargarPlatos_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/platos.txt";
         hotel.setFilePlatos(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarPlatos();
         });
-    
+
         assertEquals(0, hotel.getPlatos().size());
     }
-    
+
     @Test
     public void cargarHuespedes_ValidFile_Test() throws FileNotFoundException, IOException {
         assertEquals(0, hotel.getHuespedes().size());
@@ -112,18 +112,18 @@ public class HotelTest {
         });
         assertEquals(5, hotel.getHuespedes().size());
     }
-    
+
     @Test
     public void cargarHuespedes_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/huespedes.txt";
         hotel.setFileHuespedes(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarHuespedes();
         });
-            assertEquals(0, hotel.getHuespedes().size());
+        assertEquals(0, hotel.getHuespedes().size());
     }
-    
+
     @Test
     public void cargarReservas_ValidFile_Test() throws FileNotFoundException, IOException {
         assertEquals(0, hotel.getReservas().size());
@@ -132,18 +132,18 @@ public class HotelTest {
         });
         assertEquals(2, hotel.getReservas().size());
     }
-    
+
     @Test
     public void cargarReservas_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/reservas.txt";
         hotel.setFileReservas(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarReservas();
         });
         assertEquals(0, hotel.getReservas().size());
     }
-    
+
     @Test
     public void cargarServicios_ValidFile_Test() throws FileNotFoundException, IOException {
         assertEquals(0, hotel.getServicios().size());
@@ -152,18 +152,18 @@ public class HotelTest {
         });
         assertEquals(3, hotel.getServicios().size());
     }
-    
+
     @Test
     public void cargarServicios_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/servicios.txt";
         hotel.setFileServicios(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarServicios();
         });
         assertEquals(0, hotel.getServicios().size());
     }
-    
+
     @Test
     public void cargarConsumos_ValidFile_Test() throws FileNotFoundException, IOException {
         assertEquals(0, hotel.getConsumos().size());
@@ -172,12 +172,12 @@ public class HotelTest {
         });
         assertEquals(0, hotel.getConsumos().size());
     }
-    
+
     @Test
     public void cargarConsumos_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/consumos.txt";
         hotel.setFileConsumos(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarConsumos();
         });
@@ -190,12 +190,12 @@ public class HotelTest {
         hotel.cargarTarjetas();
         assertEquals(3, hotel.getTarjetasPayU().size());
     }
-    
+
     @Test
     public void cargarTarjetas_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/tarjetas.txt";
         hotel.setFileTarjetas(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarTarjetas();
         });
@@ -207,12 +207,12 @@ public class HotelTest {
         hotel.cargarGrupos();
         assertEquals(2, hotel.getGrupos().size());
     }
-    
+
     @Test
     public void cargarGrupos_FileNotFoundException_Test() {
         String rutaArchivo = "ruta/inexistente/grupos.txt";
         hotel.setFileGrupos(rutaArchivo);
-    
+
         assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarGrupos();
         });

@@ -1,7 +1,7 @@
 package interfaz;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthSplitPaneUI;
+//import javax.swing.plaf.synth.SynthSplitPaneUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,7 +19,8 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
     JLabel hab, fech, hues;
     int numHues = 0;
     public ArrayList<Huesped> huespedesRegistrados = new ArrayList<>();
-    private JTextField txtNombre, txtIdentificacion, txtCorreo, txtTelefono, txtFechaNacimiento, txtFechaInicio, txtFechaSalida;
+    private JTextField txtNombre, txtIdentificacion, txtCorreo, txtTelefono, txtFechaNacimiento, txtFechaInicio,
+            txtFechaSalida;
     private ArrayList<Habitacion> habitacionesRegistradas = new ArrayList<>();
     private String fechaLlegada, fechaSalida;
     JComboBox<String> cbHabitacion;
@@ -72,7 +73,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         panel.add(labelTipoHabitacion);
         hab = new JLabel();
         hab.setForeground(Color.WHITE);
-        panel.add(hab);        
+        panel.add(hab);
 
         add(panel, BorderLayout.SOUTH);
 
@@ -104,8 +105,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         HashMap<String, Integer> tarifasSuite = hotel.getTarifasSuite();
         HashMap<String, Integer> tarifasSuite2 = hotel.getTarifasSuite2();
         HashMap<Integer, Habitacion> info_habitaciones_disponibles = recepcionista.darCotizacion(
-                llegada, salida, huespedes, habitaciones, tarifasEstandar, tarifasSuite, tarifasSuite2, recepcionista
-        );
+                llegada, salida, huespedes, habitaciones, tarifasEstandar, tarifasSuite, tarifasSuite2, recepcionista);
 
         Fdisponibles ventaHabitaciones = new Fdisponibles(info_habitaciones_disponibles);
         panelHabitaciones.add(ventaHabitaciones, BorderLayout.CENTER);
@@ -172,7 +172,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         JLabel lblFechaNacimiento = new JLabel("Fecha de Nacimiento:");
         JLabel lblFechaInicio = new JLabel("Fecha de inicio:");
         JLabel lblFechaSalida = new JLabel("Fecha de salida:");
-    
+
         // Campos de texto
         txtNombre = new JTextField(15);
         txtIdentificacion = new JTextField(15);
@@ -181,11 +181,11 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         txtFechaNacimiento = new JTextField(15);
         txtFechaInicio = new JTextField(15);
         txtFechaSalida = new JTextField(15);
-    
+
         // Botones
         JButton btnAgregarHuesped = new JButton("AGREGARHUESPED");
         JButton btnTerminar = new JButton("TERMINAR");
-    
+
         // Agregar etiquetas y campos de texto al panel
         panelH.add(lblNombre);
         panelH.add(txtNombre);
@@ -201,7 +201,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         panelH.add(txtFechaInicio);
         panelH.add(lblFechaSalida);
         panelH.add(txtFechaSalida);
-    
+
         // Alineación y tamaño de los componentes
         lblNombre.setHorizontalAlignment(SwingConstants.RIGHT);
         lblIdentificacion.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -210,7 +210,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         lblFechaNacimiento.setHorizontalAlignment(SwingConstants.RIGHT);
         lblFechaInicio.setHorizontalAlignment(SwingConstants.RIGHT);
         lblFechaSalida.setHorizontalAlignment(SwingConstants.RIGHT);
-    
+
         lblNombre.setPreferredSize(new Dimension(120, 25));
         lblIdentificacion.setPreferredSize(new Dimension(120, 25));
         lblCorreo.setPreferredSize(new Dimension(120, 25));
@@ -218,21 +218,21 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         lblFechaNacimiento.setPreferredSize(new Dimension(120, 25));
         lblFechaInicio.setPreferredSize(new Dimension(120, 25));
         lblFechaSalida.setPreferredSize(new Dimension(120, 25));
-    
+
         // Agregar botones al panel
         panelH.add(btnAgregarHuesped);
         panelH.add(btnTerminar);
-    
+
         // Acción del botón "AGREGARHUESPED"
         btnAgregarHuesped.addActionListener(this);
 
         // Acción del botón "TERMINAR"
         btnTerminar.addActionListener(this);
-    
+
         contentP.add(panelH, "registrarHuesped");
     }
 
-    public void pagoInmediato(){
+    public void pagoInmediato() {
         HashMap<String, TarjetaPayU> tarjetas = hotel.getTarjetasPayU();
         FpayU panelP = new FpayU(2000, tarjetas);
 
@@ -240,24 +240,25 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         cardLayout.show(contentP, "pagoInmediato");
     }
 
-    
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         if (comando.equals("ACEPTAR")) {
-            if (hab.getText().equals("")){
+            if (hab.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Por favor, seleccione una habitación");
-            }
-            else{
-            cardLayout.show(contentP, "registrarHuesped"); }// Mostrar el panel de registro de huéspedes
+            } else {
+                cardLayout.show(contentP, "registrarHuesped");
+            } // Mostrar el panel de registro de huéspedes
         } else if (comando.equals("AGREGARHUESPED")) {
-            if (txtNombre.getText().equals("") || txtIdentificacion.getText().equals("") || txtCorreo.getText().equals("") || txtTelefono.getText().equals("") || txtFechaNacimiento.getText().equals("")) {
+            if (txtNombre.getText().equals("") || txtIdentificacion.getText().equals("")
+                    || txtCorreo.getText().equals("") || txtTelefono.getText().equals("")
+                    || txtFechaNacimiento.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Por favor, ingrese todos los datos");
-                }
-            else{numHues += 1;
-            hues.setText(numHues + "");}
-            
+            } else {
+                numHues += 1;
+                hues.setText(numHues + "");
+            }
+
             fech.setText(txtFechaInicio.getText() + " - " + txtFechaSalida.getText());
 
             String nombre = txtNombre.getText();
@@ -265,7 +266,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             String correo = txtCorreo.getText();
             String telefono = txtTelefono.getText();
             String fechaNacimiento = txtFechaNacimiento.getText();
-            
+
             txtNombre.setText(""); // Limpiar el campo de texto
             txtIdentificacion.setText("");
             txtCorreo.setText("");
@@ -281,7 +282,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             Huesped huesped = new Huesped(nombre, Integer.parseInt(identificacion), correo, telefono,
                     fechaNacimiento);
             huespedesRegistrados.add(huesped);
-           
+
         } else if (comando.equals("TERMINAR")) {
             fechaLlegada = txtFechaInicio.getText();
             fechaSalida = txtFechaSalida.getText();
@@ -295,16 +296,17 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             HashMap<Integer, Habitacion> habitaciones = hotel.getHabitaciones();
 
             recepcionista.iniciarReserva(huespedes, reservas, habitaciones,
-                   recepcionista, tarifasEstandar,
-                   tarifasSuite,
+                    recepcionista, tarifasEstandar,
+                    tarifasSuite,
                     tarifasSuite2, grupos, habitacionesRegistradas, huespedesRegistrados, fechaLlegada,
                     fechaSalida, hotel);
-            
+
             JOptionPane.showMessageDialog(null, "Reserva creada con exito", "Exito",
                     JOptionPane.INFORMATION_MESSAGE);
-            //preguntar si paga inmediatamente y mostrar la parte de pago con tarjeta
-            int opcion = JOptionPane.showConfirmDialog(null, "¿Desea pagar de inmediato? Su monto es de $95000", "Pago Inmediato",
-                JOptionPane.YES_NO_OPTION);
+            // preguntar si paga inmediatamente y mostrar la parte de pago con tarjeta
+            int opcion = JOptionPane.showConfirmDialog(null, "¿Desea pagar de inmediato? Su monto es de $95000",
+                    "Pago Inmediato",
+                    JOptionPane.YES_NO_OPTION);
             if (opcion == JOptionPane.YES_OPTION) {
                 pagoInmediato(); // Mostrar el panel de pago inmediato
             } else {
@@ -315,4 +317,3 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         }
     }
 }
-
