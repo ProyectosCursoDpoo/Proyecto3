@@ -28,17 +28,17 @@ public class Estandar extends Habitacion {
   private boolean desayuno;
 
   public Estandar(
-    int numero,
-    String ubicacion,
-    int capacidad,
-    boolean vista,
-    boolean balcon,
-    boolean cocina,
-    ArrayList<Cama> camas,
-    HashMap<String, Integer> precio,
-    String estado, int m2, boolean aireAcondicionado, 
-    boolean calefaccion, boolean tv, boolean cafetera, boolean ropaCama, boolean plancha, boolean secador, 
-    int voltaje, boolean usba, boolean usbc, boolean desayuno) {
+      int numero,
+      String ubicacion,
+      int capacidad,
+      boolean vista,
+      boolean balcon,
+      boolean cocina,
+      ArrayList<Cama> camas,
+      HashMap<String, Integer> precio,
+      String estado, int m2, boolean aireAcondicionado,
+      boolean calefaccion, boolean tv, boolean cafetera, boolean ropaCama, boolean plancha, boolean secador,
+      int voltaje, boolean usba, boolean usbc, boolean desayuno) {
     this.numero = numero;
     this.ubicacion = ubicacion;
     this.capacidad = capacidad;
@@ -195,9 +195,9 @@ public class Estandar extends Habitacion {
     this.precio = precio;
   }
 
-    public HashMap<String, Integer> getPrecio() {
-        return precio;
-    }
+  public HashMap<String, Integer> getPrecio() {
+    return precio;
+  }
 
   @Override
   public String toString() {
@@ -223,19 +223,20 @@ public class Estandar extends Habitacion {
     cadena += getEstado() + ";";
     cadena += getM2() + ";";
     cadena += isAireAcondicionado() + ";";
-    cadena+= isCalefaccion()+ ";";
-    cadena+= isTv()+ ";";
-    cadena+= isCafetera()+ ";";
-    cadena+= isRopaCama()+ ";";
-    cadena+= isPlancha()+ ";";
-    cadena+= isSecador()+ ";";
-    cadena+= getVoltaje()+ ";";
-    cadena+= isUsba()+ ";";
-    cadena+= isUsbc()+ ";";
-    cadena+= isDesayuno()+ "\n";
+    cadena += isCalefaccion() + ";";
+    cadena += isTv() + ";";
+    cadena += isCafetera() + ";";
+    cadena += isRopaCama() + ";";
+    cadena += isPlancha() + ";";
+    cadena += isSecador() + ";";
+    cadena += getVoltaje() + ";";
+    cadena += isUsba() + ";";
+    cadena += isUsbc() + ";";
+    cadena += isDesayuno() + "\n";
 
     return cadena;
   }
+
   public int getM2() {
     return m2;
   }

@@ -1,6 +1,5 @@
 package logica;
 
-
 public class Factura {
 
     public int id;
@@ -42,8 +41,6 @@ public class Factura {
     public String getFecha() {
         return fecha;
     }
-
-
 
     public int getImpuesto() {
         return impuesto;

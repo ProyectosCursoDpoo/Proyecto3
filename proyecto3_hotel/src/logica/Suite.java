@@ -27,9 +27,9 @@ public class Suite extends Habitacion {
     private boolean desayuno;
 
     public Suite(int numero, String ubicacion, int capacidad, boolean vista, boolean balcon, boolean cocina,
-    ArrayList<Cama> camas, HashMap<String, Integer> precio, String estado, int m2, boolean aireAcondicionado, 
-    boolean calefaccion, boolean tv, boolean cafetera, boolean ropaCama, boolean plancha, boolean secador, 
-    int voltaje, boolean usba, boolean usbc, boolean desayuno) {
+            ArrayList<Cama> camas, HashMap<String, Integer> precio, String estado, int m2, boolean aireAcondicionado,
+            boolean calefaccion, boolean tv, boolean cafetera, boolean ropaCama, boolean plancha, boolean secador,
+            int voltaje, boolean usba, boolean usbc, boolean desayuno) {
         this.numero = numero;
         this.ubicacion = ubicacion;
         this.capacidad = capacidad;
@@ -216,16 +216,16 @@ public class Suite extends Habitacion {
         cadena += getEstado() + ";";
         cadena += getM2() + ";";
         cadena += isAireAcondicionado() + ";";
-        cadena+= isCalefaccion()+ ";";
-        cadena+= isTv()+ ";";
-        cadena+= isCafetera()+ ";";
-        cadena+= isRopaCama()+ ";";
-        cadena+= isPlancha()+ ";";
-        cadena+= isSecador()+ ";";
-        cadena+= getVoltaje()+ ";";
-        cadena+= isUsba()+ ";";
-        cadena+= isUsbc()+ ";";
-        cadena+= isDesayuno()+ "\n";
+        cadena += isCalefaccion() + ";";
+        cadena += isTv() + ";";
+        cadena += isCafetera() + ";";
+        cadena += isRopaCama() + ";";
+        cadena += isPlancha() + ";";
+        cadena += isSecador() + ";";
+        cadena += getVoltaje() + ";";
+        cadena += isUsba() + ";";
+        cadena += isUsbc() + ";";
+        cadena += isDesayuno() + "\n";
         return cadena;
     }
 
@@ -233,116 +233,93 @@ public class Suite extends Habitacion {
         return m2;
     }
 
-
     public void setM2(int m2) {
         this.m2 = m2;
     }
-
 
     public boolean isAireAcondicionado() {
         return aireAcondicionado;
     }
 
-
     public void setAireAcondicionado(boolean aireAcondicionado) {
         this.aireAcondicionado = aireAcondicionado;
     }
-
 
     public boolean isCalefaccion() {
         return calefaccion;
     }
 
-
     public void setCalefaccion(boolean calefaccion) {
         this.calefaccion = calefaccion;
     }
-
 
     public boolean isTv() {
         return tv;
     }
 
-
     public void setTv(boolean tv) {
         this.tv = tv;
     }
-
 
     public boolean isCafetera() {
         return cafetera;
     }
 
-
     public void setCafetera(boolean cafetera) {
         this.cafetera = cafetera;
     }
-
 
     public boolean isRopaCama() {
         return ropaCama;
     }
 
-
     public void setRopaCama(boolean ropaCama) {
         this.ropaCama = ropaCama;
     }
-
 
     public boolean isPlancha() {
         return plancha;
     }
 
-
     public void setPlancha(boolean plancha) {
         this.plancha = plancha;
     }
-
 
     public boolean isSecador() {
         return secador;
     }
 
-
     public void setSecador(boolean secador) {
         this.secador = secador;
     }
-
 
     public int getVoltaje() {
         return voltaje;
     }
 
-
     public void setVoltaje(int voltaje) {
         this.voltaje = voltaje;
     }
-
 
     public boolean isUsba() {
         return usba;
     }
 
-
     public void setUsba(boolean usba) {
         this.usba = usba;
     }
-
 
     public boolean isUsbc() {
         return usbc;
     }
 
-
     public void setUsbc(boolean usbc) {
         this.usbc = usbc;
     }
 
-
     public boolean isDesayuno() {
         return desayuno;
     }
-
 
     public void setDesayuno(boolean desayuno) {
         this.desayuno = desayuno;
