@@ -76,7 +76,7 @@ public class HotelTest {
     
         // Modificamos la ruta del archivo para que no exista
         File archivo = new File("ruta/inexistente/tarifas.txt");
-        FileNotFoundException exception = assertThrows(FileNotFoundException.class, () -> {
+        assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarTarifa(archivo, tarifa);
         });
     
@@ -97,7 +97,7 @@ public class HotelTest {
         String rutaArchivo = "ruta/inexistente/platos.txt";
         hotel.setFilePlatos(rutaArchivo);
     
-        FileNotFoundException exception = assertThrows(FileNotFoundException.class, () -> {
+        assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarPlatos();
         });
     
@@ -118,7 +118,7 @@ public class HotelTest {
         String rutaArchivo = "ruta/inexistente/huespedes.txt";
         hotel.setFileHuespedes(rutaArchivo);
     
-        FileNotFoundException exception = assertThrows(FileNotFoundException.class, () -> {
+        assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarHuespedes();
         });
             assertEquals(0, hotel.getHuespedes().size());
@@ -158,7 +158,7 @@ public class HotelTest {
         String rutaArchivo = "ruta/inexistente/servicios.txt";
         hotel.setFileServicios(rutaArchivo);
     
-        FileNotFoundException exception = assertThrows(FileNotFoundException.class, () -> {
+        assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarServicios();
         });
         assertEquals(0, hotel.getServicios().size());
@@ -178,7 +178,7 @@ public class HotelTest {
         String rutaArchivo = "ruta/inexistente/consumos.txt";
         hotel.setFileConsumos(rutaArchivo);
     
-        FileNotFoundException exception = assertThrows(FileNotFoundException.class, () -> {
+        assertThrows(FileNotFoundException.class, () -> {
             hotel.cargarConsumos();
         });
         assertEquals(0, hotel.getConsumos().size());

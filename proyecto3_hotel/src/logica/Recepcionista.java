@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import interfaz.Fhabitaciones;
-
 public class Recepcionista extends Empleado {
     private String usuario;
     private String contrasena;
