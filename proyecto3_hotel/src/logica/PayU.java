@@ -32,8 +32,7 @@ public class PayU extends PasarelaPago {
         // PayU
 
         // Verificar que la tarjeta tenga fondos suficientes para el monto a pagar
-        System.out.println(monto);
-        System.out.println(this.card.getSaldo());
+
         if (this.card.getSaldo() >= monto) {
             // Restar el monto del saldo de la tarjeta
             card.setSaldo(card.getSaldo() - monto);

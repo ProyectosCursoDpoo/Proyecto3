@@ -101,9 +101,7 @@ public class Fdisponibles extends JPanel implements ActionListener {
         if (comando.equals("volver")) {
             setVisible(false);
             fHuesped.setVisible(true);
-        } 
+        }
 
     }
 }
-           
-

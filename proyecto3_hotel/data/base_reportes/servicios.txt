@@ -1,0 +1,12 @@
+Spa;100;2020
+Restaurante;450;2020
+GuíaTurística;80;2020
+Spa;160;2021
+Restaurante;850;2021
+GuíaTurística;100;2021
+Spa;120;2022
+Restaurante;750;2022
+GuíaTurística;50;2022
+Spa;60;2023
+Restaurante;350;2023
+GuíaTurística;25;2023

@@ -18,7 +18,7 @@ public class Hotel {
     public HashMap<Integer, Grupo> grupos = new HashMap<>();
     public HashMap<Integer, Consumo> consumos = new HashMap<>();
     public HashMap<String, TarjetaPayU> tarjetasPayU = new HashMap<>();
-    public HashMap<String, Tarjeta> tarjetasPayPal = new HashMap<>();
+    public HashMap<String, TarjetaPayPal> tarjetasPayPal = new HashMap<>();
     public HashMap<String, Tarjeta> tarjetasApplePay = new HashMap<>();
 
     public boolean parking_gratis = true;
@@ -111,6 +111,14 @@ public class Hotel {
     public HashMap<String, TarjetaPayU> getTarjetasPayU() {
         return this.tarjetasPayU;
     }
+
+    public HashMap<String, TarjetaPayPal> getTarjetasPayPal() {
+        return this.tarjetasPayPal;
+    }
+
+    // public HashMap<String, TarjetaApple> getTarjetasApplePay() {
+    // return this.tarjetasApplePay;
+    // }
 
     public HashMap<Integer, Huesped> getHuespedes() {
         return this.huespedes;
@@ -636,16 +644,30 @@ public void cargarHuespedes() throws FileNotFoundException, IOException {
             while (linea != null) {
                 String[] partes = linea.split(";");
                 String plataforma = partes[0];
-                String nombre = partes[1];
-                int id = Integer.parseInt(partes[2]);
-                String correo = partes[3];
-                String numTarjeta = partes[4];
-                int cvv = Integer.parseInt(partes[5]);
-                String fechaVencimiento = partes[6];
-                Double saldo = Double.parseDouble(partes[7]);
+
                 if (plataforma.equals("payU")) {
+                    String nombre = partes[1];
+                    int id = Integer.parseInt(partes[2]);
+                    String correo = partes[3];
+                    String numTarjeta = partes[4];
+                    int cvv = Integer.parseInt(partes[5]);
+                    String fechaVencimiento = partes[6];
+                    Double saldo = Double.parseDouble(partes[7]);
                     TarjetaPayU tarjeta = new TarjetaPayU(nombre, id, correo, numTarjeta, cvv, fechaVencimiento, saldo);
                     tarjetasPayU.put(numTarjeta, tarjeta);
+                } else if (plataforma.equals("payPal")) {
+                    String nombre = partes[1];
+                    int id = Integer.parseInt(partes[2]);
+                    String correo = partes[3];
+                    String numTarjeta = partes[4];
+                    int cvv = Integer.parseInt(partes[5]);
+                    String fechaVencimiento = partes[6];
+                    boolean estado = (partes[7].equals("True") ? true : false);
+                    String token = partes[8];
+                    Double saldo = Double.parseDouble(partes[9]);
+                    TarjetaPayPal tarjeta = new TarjetaPayPal(nombre, id, correo, numTarjeta, cvv, fechaVencimiento,
+                            estado, token, saldo);
+                    tarjetasPayPal.put(numTarjeta, tarjeta);
                 }
 
                 linea = br.readLine();
@@ -708,8 +730,6 @@ public void cargarHuespedes() throws FileNotFoundException, IOException {
     }
 
     }
-
-    // TODO: cargar factura
 
     public void guardarDatabase(HashMap<String, String> lista) {
         try (

@@ -2,8 +2,8 @@ package logica;
 
 public abstract class PasarelaPago {
 
-    public boolean pagar(int numTarjeta, int cvv, String fechaVencimiento, int monto) {
-        // TODO
+    public boolean pagar(double monto) {
+
         return true;
     }
 

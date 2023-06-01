@@ -4,9 +4,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+//import java.awt.List;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+// import java.io.BufferedReader;
+// import java.io.FileReader;
+// import java.io.IOException;
+// import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.JButton;
@@ -104,23 +109,66 @@ public class FfacturaReserva extends JFrame implements ActionListener {
 
     }
 
+    // TODO hacer el cambio dinamico
+    // public ArrayList<String> leerPasarelas() throws IOException {
+    // ArrayList<String> gatewayClasses = new ArrayList<>();
+    // BufferedReader reader = new BufferedReader(new
+    // FileReader("../Proyecto3/proyecto3_hotel/data/pasarelas.txt"));
+    // String line = reader.readLine();
+    // while (line != null) {
+    // gatewayClasses.add(line);
+    // line = reader.readLine();
+    // }
+    // reader.close();
+    // return gatewayClasses;
+    // }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         if (comando.equals("volver")) {
             this.dispose();
         } else if (comando.equals("pagar")) {
+            // TODO revisar luego
+            // ArrayList<PasarelaPago> pasarelasPago = new ArrayList<>();
+
+            // try {
+            // ArrayList<String> gatewayClasses = leerPasarelas(); // Método para leer el
+            // archivo de
+            // // configuración
+
+            // for (String gatewayClass : gatewayClasses) {
+            // Class<?> clazz = Class.forName(gatewayClass);
+            // PasarelaPago pasarela = (PasarelaPago)
+            // clazz.getDeclaredConstructor().newInstance();
+            // pasarelasPago.add(pasarela);
+            // }
+            // } catch (Exception ex) {
+            // // Manejar errores de carga de pasarelas de pago
+            // ex.printStackTrace();
+            // }
+
             String opc = JOptionPane.showInputDialog(
                     "1. Pasarele de pago Payu\n2. Pasarele de pago Paypal\n3. Pasarele de pago ApplePay", "1");
             if (opc.equals("1")) {
                 HashMap<String, TarjetaPayU> tarjetasPayU = hotel.getTarjetasPayU();
                 FpayU payu = new FpayU(this.total, tarjetasPayU);
                 payu.setVisible(true);
-
-                hotel.logOut();
+                if (payu.isPago()) {
+                    hotel.logOut();
+                }
+                this.dispose();
+            } else if (opc.equals("2")) {
+                HashMap<String, TarjetaPayPal> tarjetasPaypal = hotel.getTarjetasPayPal();
+                // System.out.println(tarjetasPaypal);
+                FpayPal paypal = new FpayPal(this.total, tarjetasPaypal);
+                paypal.setVisible(true);
+                if (paypal.isPago()) {
+                    hotel.logOut();
+                }
                 this.dispose();
             }
-        }
 
+        }
     }
 }

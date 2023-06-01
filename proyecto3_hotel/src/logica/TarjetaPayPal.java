@@ -1,28 +1,29 @@
 package logica;
 
-public abstract class Tarjeta {
+public class TarjetaPayPal extends Tarjeta {
     private String nombre;
     private int identificacion;
     private String correo;
     private String numTarjeta;
     private int cvv;
     private String fechaVencimiento;
+    private boolean estado;
+    private String llaveAutenticacion;
     private double saldo;
 
-    // Constructor
-    // public Tarjeta(String nombre, int identificacion, String correo,
-    // String numTarjeta, int cvv,
-    // String fechaVencimiento, double saldo) {
-
-    // this.nombre = nombre;
-    // this.identificacion = identificacion;
-    // this.correo = correo;
-    // this.numTarjeta = numTarjeta;
-    // this.cvv = cvv;
-    // this.fechaVencimiento = fechaVencimiento;
-    // this.saldo = saldo;
-
-    // }
+    public TarjetaPayPal(String nombre, int identificacion, String correo,
+            String numTarjeta, int cvv,
+            String fechaVencimiento, boolean estado, String llaveAutenticacion, double saldo) {
+        this.nombre = nombre;
+        this.identificacion = identificacion;
+        this.correo = correo;
+        this.numTarjeta = numTarjeta;
+        this.cvv = cvv;
+        this.fechaVencimiento = fechaVencimiento;
+        this.estado = estado;
+        this.llaveAutenticacion = llaveAutenticacion;
+        this.saldo = saldo;
+    }
 
     /**
      * @return String return the nombre
@@ -67,7 +68,7 @@ public abstract class Tarjeta {
     }
 
     /**
-     * @return int return the numTarjeta
+     * @return String return the numTarjeta
      */
     public String getNumTarjeta() {
         return numTarjeta;
@@ -109,7 +110,35 @@ public abstract class Tarjeta {
     }
 
     /**
-     * @return int return the saldo
+     * @return boolean return the estado
+     */
+    public boolean isEstado() {
+        return estado;
+    }
+
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    /**
+     * @return String return the llaveAutenticacion
+     */
+    public String getLlaveAutenticacion() {
+        return llaveAutenticacion;
+    }
+
+    /**
+     * @param llaveAutenticacion the llaveAutenticacion to set
+     */
+    public void setLlaveAutenticacion(String llaveAutenticacion) {
+        this.llaveAutenticacion = llaveAutenticacion;
+    }
+
+    /**
+     * @return double return the saldo
      */
     public double getSaldo() {
         return saldo;
@@ -118,7 +147,7 @@ public abstract class Tarjeta {
     /**
      * @param saldo the saldo to set
      */
-    public void setSaldo(int saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 

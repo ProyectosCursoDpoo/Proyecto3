@@ -1,3 +1,7 @@
 payU;Juan Perez;12345678;juan.perez@example.com;1234567890123456;789;06/25;500000
 payU;Ana Lopez;87654321;ana.lopez@example.com;9876543210987654;432;09/24;100000
 payU;Pedro Rodriguez;56789012;pedro.rodriguez@example.com;3141592653589793;951;12/23;250000
+payPal;Maria Garcia;987654321;maria.garcia@example.com;9999888877776666;123;11/25;True;54321;2000000
+payPal;Alejandro Torres;123456789;alejandro.torres@example.com;5555666677778888;789;09/24;True;98765;600000
+payPal;Sofia Lopez;456789012;sofia.lopez@example.com;2222111133334444;456;12/23;False;24680;450000
+
