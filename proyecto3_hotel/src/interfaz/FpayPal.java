@@ -44,6 +44,18 @@ public class FpayPal extends JFrame implements ActionListener {
         setLayout(new BorderLayout());
         setSize(screenSize.width - 50, screenSize.height - 80);
 
+        JPanel panel1 = new JPanel(new GridLayout(1, 1, 10, 10));
+        panel1.setBackground(fondo);
+
+        JLabel titulo = new JLabel("PayPal");
+        titulo.setFont(new Font("Georgia", Font.BOLD, 60));
+        titulo.setBackground(fondo);
+        titulo.setForeground(Color.white);
+        titulo.setHorizontalAlignment(JLabel.CENTER);
+
+        panel1.add(titulo);
+        add(panel1, BorderLayout.NORTH);
+
         JPanel panel = new JPanel(new GridLayout(5, 2, 10, 10));
         panel.setBackground(fondo);
 

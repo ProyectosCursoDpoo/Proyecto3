@@ -1,0 +1,23 @@
+Servicios utilizados: 
+ 	---Las habitaciones que utilizaste en tu reserva son:--- 
+Habitacion #501: 
+ Ubicacion: Piso5
+Capacidad: 2
+Camas: 
+	Capacidad: 2
+	Tamaño: King
+	Capacidad: 2
+	Tamaño: King
+
+Habitacion #201: 
+ Ubicacion: Piso2
+Capacidad: 2
+Camas: 
+	Capacidad: 1
+	Tamaño: Sencilla
+	Capacidad: 1
+	Tamaño: Sencilla
+
+	 ---Los consumos adicionales son:--- 
+El precio total de la factura es: 480000,0 pesos colombianos 
+Gracias por reservar con nostros! 
