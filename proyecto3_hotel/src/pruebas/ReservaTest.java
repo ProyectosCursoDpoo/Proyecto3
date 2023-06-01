@@ -57,7 +57,7 @@ public class ReservaTest {
 
             hotel.getReservas().put(numeroReserva, reserva);
 
-            // Verificar que la reserva se haya agregado correctamente
+            // Verificar que la reserva se haya agregado correctamente||
             assertEquals(reserva, hotel.getReservas().get(numeroReserva));
         } catch (Exception e) {
             // Manejar cualquier excepción lanzada durante el proceso de prueba
