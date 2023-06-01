@@ -27,20 +27,13 @@ public class ReservaTest {
 
     @Before
     public void setUp() {
-        // Aquí puedes inicializar una instancia de la clase Hotel con los datos
-        // necesarios para las pruebas
         hotel = new Hotel();
-        // Puedes agregar código adicional para configurar el hotel antes de las pruebas
     }
 
     @Test
     public void testCrearReserva() {
         try {
-            // Cargar datos necesarios para la creación de una reserva
-            hotel.cargarHabitaciones();
-            hotel.cargarHuespedes();
 
-            // Crear un nuevo objeto Reserva con los datos necesarios
             int numeroReserva = 1; // Número de reserva único
 
             Huesped huesped = new Huesped("Luis ", 2222, "Luis@", "315666", "25/04/2004");
@@ -56,14 +49,12 @@ public class ReservaTest {
 
             Empleado empleado = new Recepcionista();
 
-            // Grupo grupo = new Grupo(hotel.getHuespedes(), hotel.getHabitaciones(), 2);
             String fechaInicio = "05.06.2023"; // Fecha de inicio de la reserva
             String rangoFechas = "506-510"; // Fecha de fin de la reserva
 
             reserva reserva = new reserva(numeroReserva, grupo, 150000, fechaInicio, rangoFechas,
                     empleado);
 
-            // Agregar la reserva al hotel
             hotel.getReservas().put(numeroReserva, reserva);
 
             // Verificar que la reserva se haya agregado correctamente
