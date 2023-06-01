@@ -1,9 +1,5 @@
 package logica;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.*;
 import java.util.*;
 
@@ -32,6 +28,16 @@ public class Hotel {
     public boolean bbq = true;
     public boolean recepcion_24 = true;
     public boolean pet_friendly = true;
+    
+    public String fileHabitaciones = "../Proyecto3/proyecto3_hotel/data/habitaciones.txt";
+    public String fileDatabase = "../Proyecto3/proyecto3_hotel/data/database.txt";
+    public String fileHuespedes = "../Proyecto3/proyecto3_hotel/data/hueped.txt";
+    public String fileGrupos = "../Proyecto3/proyecto3_hotel/data/grupos.txt";
+    public String fileReservas = "../Proyecto3/proyecto3_hotel/data/reserva.txt";
+    public String fileServicios = "../Proyecto3/proyecto3_hotel/data/servicios.txt";
+    public String fileConsumos = "../Proyecto3/proyecto3_hotel/data/consumos.txt";
+    public String fileTarjetas = "../Proyecto3/proyecto3_hotel/data/infoTarjetas.txt";
+    public String filePlatos = "../Proyecto3/proyecto3_hotel/data/menu.txt";
 
     public Empleado empleado;
 
@@ -40,12 +46,9 @@ public class Hotel {
 
             cargarDatabase();
 
-            cargarTarifa(new File(
-                    "../Proyecto3/proyecto3_hotel/data/tarifa.txt"), tarifasEstandar);
-            cargarTarifa(new File(
-                    "../Proyecto3/proyecto3_hotel/data/tarifa2.txt"), tarifasSuite);
-            cargarTarifa(new File(
-                    "../Proyecto3/proyecto3_hotel/data/tarifa3.txt"), tarifasSuite2);
+            cargarTarifa(new File("../Proyecto3/proyecto3_hotel/data/tarifa.txt"), tarifasEstandar);
+            cargarTarifa(new File("../Proyecto3/proyecto3_hotel/data/tarifa2.txt"), tarifasSuite);
+            cargarTarifa(new File("../Proyecto3/proyecto3_hotel/data/tarifa3.txt"), tarifasSuite2);
 
             cargarHabitaciones();
 
@@ -63,20 +66,46 @@ public class Hotel {
 
             cargarTarjetas();
 
-            // System.out.println(this.database);
-            // System.out.println(this.tarifasEstandar);
-            // System.out.println(this.tarifasSuite);
-            // System.out.println(this.tarifasSuite2);
-            // System.out.println(this.habitaciones);
-            // System.out.println(this.platos);
-            // System.out.println(this.huespedes);
-            // System.out.println(this.grupos);
-            // System.out.println(this.reservas);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+    
+    public void setFileHabitaciones(String file) {
+    	fileHabitaciones = file;
+    }
+
+    public void setFileDataBase(String file) {
+    	fileDatabase = file;
+    }
+
+    public void setFileHuespedes(String file) {
+    	fileHuespedes = file;
+    }
+
+    public void setFileGrupos(String file) {
+    	fileGrupos = file;
+    }
+
+    public void setFileReservas(String file) {
+    	fileReservas = file;
+    }
+
+    public void setFileServicios(String file) {
+    	fileServicios = file;
+    }
+
+    public void setFileConsumos(String file) {
+    	fileConsumos = file;
+    }
+
+    public void setFileTarjetas(String file) {
+    	fileTarjetas = file;
+    }
+
+    public void setFilePlatos(String file) {
+    	filePlatos = file;
     }
 
     public HashMap<String, TarjetaPayU> getTarjetasPayU() {
@@ -323,29 +352,6 @@ public class Hotel {
         } while (opcion != 7);
     }
 
-    private void cargarDatabase() {
-        System.out.println("Cargando DataBase de Usuarios");
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(new File(
-                    "../Proyecto3/proyecto3_hotel/data/database.txt")));
-            // "../proyecto2/entrega2/proyecto2_hotel/data/database.txt"
-            String linea;
-            linea = br.readLine();
-            while (linea != null) {
-                String[] partes = linea.split(";");
-                String usuario = partes[0];
-                String contrasena = partes[1];
-
-                database.put(usuario, contrasena);
-
-                linea = br.readLine();
-            }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     public void agregarUsuario(String usuario, String contrasena) {
         database.put(usuario, contrasena);
         for (String i : database.keySet()) {
@@ -353,85 +359,109 @@ public class Hotel {
         }
     }
 
-    private void cargarHabitaciones() {
-        try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/habitaciones.txt")));
+    public void cargarDatabase() throws FileNotFoundException, IOException {
+        //System.out.println("Cargando DataBase de Usuarios");
+        try (BufferedReader br = new BufferedReader(new FileReader(new File(fileDatabase)))) {
             String linea;
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
-                int numero = Integer.valueOf(partes[0]);
-                String ubicacion = partes[1];
-                int capacidad = Integer.valueOf(partes[2]);
-                int tipo = Integer.valueOf(partes[3]);
-
-                ArrayList<Cama> camas_habitacion = new ArrayList<>();
-                if (partes[4].contains("/")) {
-                    String[] camas_total = (partes[4].split("/"));
-                    for (String i : camas_total) {
-                        String[] caracteristicas = i.split("-");
-                        Cama cama_nueva = new Cama(caracteristicas[0], Integer.parseInt(caracteristicas[1]));
-                        camas_habitacion.add(cama_nueva);
-                    }
-                } else {
-                    String camas_total = partes[4];
-                    String[] caracteristicas = camas_total.split("-");
-                    Cama cama_nueva = new Cama(caracteristicas[0], Integer.parseInt(caracteristicas[1]));
-                    camas_habitacion.add(cama_nueva);
-
-                }
-
-                boolean vista = Boolean.valueOf(partes[5]);
-                boolean balcon = Boolean.valueOf(partes[6]);
-                boolean cocina = Boolean.valueOf(partes[7]);
-                String estado = partes[8];
-
-                int m2 = Integer.valueOf(partes[9]);
-                boolean aireAcondicionado = Boolean.valueOf(partes[10]);
-                boolean calefaccion = Boolean.valueOf(partes[11]);
-                boolean tv = Boolean.valueOf(partes[12]);
-                boolean cafetera = Boolean.valueOf(partes[13]);
-                boolean ropaCama = Boolean.valueOf(partes[14]);
-                boolean plancha = Boolean.valueOf(partes[15]);
-                boolean secador = Boolean.valueOf(partes[16]);
-                int voltaje = Integer.valueOf(partes[17]);
-                boolean usba = Boolean.valueOf(partes[18]);
-                boolean usbc = Boolean.valueOf(partes[19]);
-                boolean desayuno = Boolean.valueOf(partes[20]);
-
-                Habitacion habi_nueva;
-
-                if (habitaciones.get(numero) == null) {
-                    if (tipo == 1) {
-                        habi_nueva = new Estandar(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
-                                tarifasEstandar, estado, m2, aireAcondicionado, calefaccion, tv, cafetera, ropaCama,
-                                plancha, secador, voltaje, usba, usbc, desayuno);
-                    } else if (tipo == 2) {
-                        habi_nueva = new Suite(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
-                                tarifasSuite, estado, m2, aireAcondicionado, calefaccion, tv, cafetera, ropaCama,
-                                plancha, secador, voltaje, usba, usbc, desayuno);
-                    } else {
-                        habi_nueva = new Suite_doble(numero, ubicacion, capacidad, vista, balcon, cocina,
-                                camas_habitacion, tarifasSuite2, estado, m2, aireAcondicionado, calefaccion, tv,
-                                cafetera, ropaCama, plancha, secador, voltaje, usba, usbc, desayuno);
-                    }
-                    habitaciones.put(numero, habi_nueva);
-                } else {
-                    System.out.println("Este número de habitacion ya existe");
-                }
+                String usuario = partes[0];
+                String contrasena = partes[1];
+    
+                database.put(usuario, contrasena);
+    
                 linea = br.readLine();
             }
-            setHabitaciones(habitaciones);
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("Archivo de base de datos no encontrado: " + e.getMessage());
+            throw e;
+        } catch (IOException e) {
+            System.out.println("Error al leer o cerrar el archivo: " + e.getMessage());
+            throw e;
         }
     }
+    
+    
+public void cargarHabitaciones() throws FileNotFoundException, IOException {
+    try (BufferedReader br = new BufferedReader(new FileReader(new File(fileHabitaciones)))) {
+        String linea;
+        linea = br.readLine();
+        while (linea != null) {
+            String[] partes = linea.split(";");
+            int numero = Integer.valueOf(partes[0]);
+            String ubicacion = partes[1];
+            int capacidad = Integer.valueOf(partes[2]);
+            int tipo = Integer.valueOf(partes[3]);
 
-    private void cargarTarifa(File archivo, HashMap<String, Integer> tarifa) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(archivo));
+            ArrayList<Cama> camas_habitacion = new ArrayList<>();
+            if (partes[4].contains("/")) {
+                String[] camas_total = partes[4].split("/");
+                for (String i : camas_total) {
+                    String[] caracteristicas = i.split("-");
+                    Cama cama_nueva = new Cama(caracteristicas[0], Integer.parseInt(caracteristicas[1]));
+                    camas_habitacion.add(cama_nueva);
+                }
+            } else {
+                String camas_total = partes[4];
+                String[] caracteristicas = camas_total.split("-");
+                Cama cama_nueva = new Cama(caracteristicas[0], Integer.parseInt(caracteristicas[1]));
+                camas_habitacion.add(cama_nueva);
+            }
+
+            boolean vista = Boolean.valueOf(partes[5]);
+            boolean balcon = Boolean.valueOf(partes[6]);
+            boolean cocina = Boolean.valueOf(partes[7]);
+            String estado = partes[8];
+
+            int m2 = Integer.valueOf(partes[9]);
+            boolean aireAcondicionado = Boolean.valueOf(partes[10]);
+            boolean calefaccion = Boolean.valueOf(partes[11]);
+            boolean tv = Boolean.valueOf(partes[12]);
+            boolean cafetera = Boolean.valueOf(partes[13]);
+            boolean ropaCama = Boolean.valueOf(partes[14]);
+            boolean plancha = Boolean.valueOf(partes[15]);
+            boolean secador = Boolean.valueOf(partes[16]);
+            int voltaje = Integer.valueOf(partes[17]);
+            boolean usba = Boolean.valueOf(partes[18]);
+            boolean usbc = Boolean.valueOf(partes[19]);
+            boolean desayuno = Boolean.valueOf(partes[20]);
+
+            Habitacion habi_nueva;
+
+            if (habitaciones.get(numero) == null) {
+                if (tipo == 1) {
+                    habi_nueva = new Estandar(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
+                            tarifasEstandar, estado, m2, aireAcondicionado, calefaccion, tv, cafetera, ropaCama,
+                            plancha, secador, voltaje, usba, usbc, desayuno);
+                } else if (tipo == 2) {
+                    habi_nueva = new Suite(numero, ubicacion, capacidad, vista, balcon, cocina, camas_habitacion,
+                            tarifasSuite, estado, m2, aireAcondicionado, calefaccion, tv, cafetera, ropaCama,
+                            plancha, secador, voltaje, usba, usbc, desayuno);
+                } else {
+                    habi_nueva = new Suite_doble(numero, ubicacion, capacidad, vista, balcon, cocina,
+                            camas_habitacion, tarifasSuite2, estado, m2, aireAcondicionado, calefaccion, tv,
+                            cafetera, ropaCama, plancha, secador, voltaje, usba, usbc, desayuno);
+                }
+                habitaciones.put(numero, habi_nueva);
+            } else {
+                System.out.println("Este número de habitación ya existe");
+            }
+            linea = br.readLine();
+        }
+    } catch (FileNotFoundException e) {
+        System.out.println("Archivo de habitaciones no encontrado: " + e.getMessage());
+        throw e;
+    } catch (IOException e) {
+        System.out.println("Error al leer o cerrar el archivo: " + e.getMessage());
+        throw e;
+        }
+    setHabitaciones(habitaciones);
+    }
+
+
+    public void cargarTarifa(File archivo, HashMap<String, Integer> tarifa) throws FileNotFoundException, IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             linea = br.readLine();
             while (linea != null) {
@@ -445,16 +475,18 @@ public class Hotel {
                 }
                 linea = br.readLine();
             }
-            br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("Archivo de tarifas no encontrado: " + e.getMessage());
+            throw e;
+        } catch (IOException e) {
+            System.out.println("Error al leer o cerrar el archivo: " + e.getMessage());
+            throw e;
         }
     }
-
-    private void cargarPlatos() {
+    
+    public void cargarPlatos() throws FileNotFoundException, IOException {
         try {
-            BufferedReader br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/menu.txt")));
+            BufferedReader br = new BufferedReader(new FileReader(new File(filePlatos)));
             String linea;
             linea = br.readLine();
             while (linea != null) {
@@ -473,44 +505,43 @@ public class Hotel {
                 linea = br.readLine();
             }
             br.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("Archivo de platos no encontrado: " + e.getMessage());
+        } catch (IOException e) {
+            throw new IOException("Error al leer o cerrar el archivo de platos: " + e.getMessage());
         }
     }
+    
 
-    private void cargarHuespedes() {
-        try {
-            BufferedReader br;
-            String linea;
-
-            br = new BufferedReader(new FileReader(new File(
-                    "../Proyecto3/proyecto3_hotel/data/hueped.txt")));
-            linea = br.readLine();
-            while (linea != null) {
-                String[] partes = linea.split(";");
-                String nombre = partes[0];
-                int id = Integer.parseInt(partes[1]);
-                String correo = partes[2];
-                String celular = partes[3];
-                String fecha = partes[4];
-                Huesped nuevo_huesped = new Huesped(nombre, id, correo, celular, fecha);
-                huespedes.put(id, nuevo_huesped);
-                linea = br.readLine();
-            }
-            br.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void cargarReservas() {
-        BufferedReader br;
+public void cargarHuespedes() throws FileNotFoundException, IOException {
+    try {
+        BufferedReader br = new BufferedReader(new FileReader(new File(fileHuespedes)));
         String linea;
-        try {
-            br = new BufferedReader(new FileReader(new File("../Proyecto3/proyecto3_hotel/data/reserva.txt")));
+        linea = br.readLine();
+        while (linea != null) {
+            String[] partes = linea.split(";");
+            String nombre = partes[0];
+            int id = Integer.parseInt(partes[1]);
+            String correo = partes[2];
+            String celular = partes[3];
+            String fecha = partes[4];
+            Huesped nuevo_huesped = new Huesped(nombre, id, correo, celular, fecha);
+            huespedes.put(id, nuevo_huesped);
             linea = br.readLine();
+        }
+        br.close();
+    } catch (FileNotFoundException e) {
+        throw new FileNotFoundException("Archivo de huéspedes no encontrado: " + e.getMessage());
+    } catch (IOException e) {
+        throw new IOException("Error al leer o cerrar el archivo de huéspedes: " + e.getMessage());
+    }
+}
+
+
+    public void cargarReservas() throws FileNotFoundException, IOException {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(new File(fileReservas)));
+            String linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
                 int id_reserva = Integer.parseInt(partes[0]);
@@ -518,36 +549,34 @@ public class Hotel {
                 int tarifa = Integer.parseInt(partes[2]);
                 String fecha_inicio = partes[3];
                 String rango_fecha = partes[4];
-                // String usuario_empleado = partes[5];
+
                 Grupo grupo = grupos.get(id_grupo);
-
-                // String info_empleado = database.get(usuario_empleado);
-
+                
                 Recepcionista empleado = new Recepcionista();
-
                 reserva reserva = new reserva(id_reserva, grupo, tarifa, fecha_inicio, rango_fecha, empleado);
                 reservas.put(id_reserva, reserva);
+                
 
                 linea = br.readLine();
             }
+            br.close();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("Archivo de reservas no encontrado: " + e.getMessage());
         } catch (IOException e) {
+            throw new IOException("Error al leer o cerrar el archivo de reservas: " + e.getMessage());
         }
     }
 
-    private void cargarServicios() {
-        BufferedReader br;
-        String linea;
+
+    public void cargarServicios() throws FileNotFoundException, IOException {
         try {
-            br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/servicios.txt")));
-            linea = br.readLine();
+            BufferedReader br = new BufferedReader(new FileReader(new File(fileServicios)));
+            String linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
                 String nombre_servicio = partes[0];
-                // int tarifa = Integer.parseInt(partes[1]);
-                // String ubicacion = partes[2];
-                // String horario = partes[3];
-                Servicios servicio;
+                
+                Servicios servicio = null;
                 if (nombre_servicio.equals("Spa")) {
                     servicio = new Spa();
                     servicios.put(nombre_servicio, servicio);
@@ -558,19 +587,22 @@ public class Hotel {
                     servicio = new GuiaTuristica();
                     servicios.put(nombre_servicio, servicio);
                 }
+                
                 linea = br.readLine();
             }
+            br.close();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("Archivo de servicios no encontrado: " + e.getMessage());
         } catch (IOException e) {
+            throw new IOException("Error al leer o cerrar el archivo de servicios: " + e.getMessage());
         }
     }
+    
 
-    private void cargarConsumos() {
-        BufferedReader br;
-        String linea;
+    public void cargarConsumos() throws FileNotFoundException, IOException {
         try {
-            br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/consumos.txt")));
-            linea = br.readLine();
+            BufferedReader br = new BufferedReader(new FileReader(new File(fileConsumos)));
+            String linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
                 int id_consumo = Integer.parseInt(partes[0]);
@@ -586,16 +618,20 @@ public class Hotel {
 
                 linea = br.readLine();
             }
+            br.close();
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("Archivo de consumos no encontrado: " + e.getMessage());
         } catch (IOException e) {
+            throw new IOException("Error al leer o cerrar el archivo de consumos: " + e.getMessage());
         }
     }
 
-    private void cargarTarjetas() {
+    public void cargarTarjetas() throws FileNotFoundException{
         BufferedReader br;
         String linea;
         try {
             br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/infoTarjetas.txt")));
+                    new FileReader(new File(fileTarjetas)));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -614,16 +650,20 @@ public class Hotel {
 
                 linea = br.readLine();
             }
+            br.close();
+        } catch (FileNotFoundException e) {
+            throw e;
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void cargarGrupos() {
+    public void cargarGrupos() throws FileNotFoundException{
         BufferedReader br;
         String linea;
 
         try {
-            br = new BufferedReader(new FileReader(new File("../Proyecto3/proyecto3_hotel/data/grupos.txt")));
+            br = new BufferedReader(new FileReader(new File(fileGrupos)));
             linea = br.readLine();
             while (linea != null) {
                 ArrayList<Huesped> huespedes_grupo = new ArrayList<>();
@@ -660,8 +700,12 @@ public class Hotel {
                 linea = br.readLine();
             }
             // System.out.println(grupos);
-        } catch (IOException e) {
-        }
+         br.close();
+    } catch (FileNotFoundException e) {
+        throw e;
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
 
     }
 
@@ -689,7 +733,7 @@ public class Hotel {
 
         try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                        "../Proyecto3/proyecto3_hotel/data/habitaciones.txt")))) {
+                        fileHabitaciones)))) {
             String cadena = "";
             for (Object k : lista.keySet()) {
                 String habitacion = lista.get(k).toString();
