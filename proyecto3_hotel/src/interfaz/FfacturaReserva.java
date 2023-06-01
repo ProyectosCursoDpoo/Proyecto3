@@ -8,6 +8,15 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 // import java.io.BufferedReader;
 // import java.io.FileReader;
 // import java.io.IOException;
@@ -124,26 +133,116 @@ public class FfacturaReserva extends JFrame implements ActionListener {
                 HashMap<String, TarjetaPayU> tarjetasPayU = hotel.getTarjetasPayU();
                 FpayU payu = new FpayU(this.total, tarjetasPayU);
                 payu.setVisible(true);
-                if (payu.isPago()) {
-                    hotel.logOut();
+
+                String texto = "";
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(
+                            new File("../Proyecto3/proyecto3_hotel/data/historial_pagos/payu.txt")));
+                    String linea = br.readLine();
+                    while (linea != null) {
+                        texto += linea + "\n";
+                    }
+                } catch (Exception exx) {
+                    exx.printStackTrace();
                 }
+
+                try (
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+                                "../Proyecto3/proyecto3_hotel/data/historial_pagos/payu.txt")))) {
+                    String cadena = "";
+                    cadena += texto;
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    String date = dateFormat.format(Calendar.getInstance().getTime());
+                    cadena += "Fecha: " + date + ";";
+                    cadena += "Total: " + this.total + ";";
+                    cadena += "Numero reserva: " + this.id + "\n";
+
+                    bw.write(cadena);
+                    bw.close();
+                } catch (IOException ex) {
+
+                    ex.printStackTrace();
+                }
+
+                hotel.logOut();
+
                 this.dispose();
             } else if (opc.equals("2")) {
                 HashMap<String, TarjetaPayPal> tarjetasPaypal = hotel.getTarjetasPayPal();
                 // System.out.println(tarjetasPaypal);
                 FpayPal paypal = new FpayPal(this.total, tarjetasPaypal);
                 paypal.setVisible(true);
-                if (paypal.isPago()) {
-                    hotel.logOut();
+
+                String texto = "";
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(
+                            new File("../Proyecto3/proyecto3_hotel/data/historial_pagos/paypal.txt")));
+                    String linea = br.readLine();
+                    while (linea != null) {
+                        texto += linea + "\n";
+                    }
+                } catch (Exception exx) {
+                    exx.printStackTrace();
                 }
+
+                try (
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+                                "../Proyecto3/proyecto3_hotel/data/historial_pagos/paypal.txt")))) {
+                    String cadena = "";
+                    cadena += texto;
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    String date = dateFormat.format(Calendar.getInstance().getTime());
+                    cadena += "Fecha: " + date + ";";
+                    cadena += "Total: " + this.total + ";";
+                    cadena += "Numero reserva: " + this.id + "\n";
+
+                    bw.write(cadena);
+                    bw.close();
+                } catch (IOException ex) {
+
+                    ex.printStackTrace();
+                }
+
+                hotel.logOut();
+
                 this.dispose();
             } else if (opc.equals("3")) {
                 HashMap<String, TarjetaApplePay> tarjetasApplePay = hotel.getTarjetasApplePay();
                 FApplePay applePay = new FApplePay(this.total, tarjetasApplePay);
                 applePay.setVisible(true);
-                if (applePay.isPago()) {
-                    hotel.logOut();
+
+                String texto = "";
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(
+                            new File("../Proyecto3/proyecto3_hotel/data/historial_pagos/applepay.txt")));
+                    String linea = br.readLine();
+                    while (linea != null) {
+                        texto += linea + "\n";
+                    }
+                } catch (Exception exx) {
+                    exx.printStackTrace();
                 }
+
+                try (
+                        BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+                                "../Proyecto3/proyecto3_hotel/data/historial_pagos/applepay.txt")))) {
+                    String cadena = "";
+                    cadena += texto;
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+                    String date = dateFormat.format(Calendar.getInstance().getTime());
+                    cadena += "Fecha: " + date + ";";
+                    cadena += "Total: " + this.total + ";";
+                    cadena += "Numero reserva: " + this.id + "\n";
+
+                    bw.write(cadena);
+                    bw.close();
+                } catch (IOException ex) {
+
+                    ex.printStackTrace();
+                }
+
+                hotel.logOut();
+
                 this.dispose();
             }
 

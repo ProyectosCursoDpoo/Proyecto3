@@ -37,4 +37,18 @@ public class ApplePay extends PasarelaPago {
 
     }
 
+    /**
+     * @return TarjetaApplePay return the card
+     */
+    public TarjetaApplePay getCard() {
+        return card;
+    }
+
+    /**
+     * @param card the card to set
+     */
+    public void setCard(TarjetaApplePay card) {
+        this.card = card;
+    }
+
 }
