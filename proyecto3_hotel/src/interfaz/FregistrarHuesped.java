@@ -1,6 +1,8 @@
 package interfaz;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthSplitPaneUI;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,6 +22,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
     private JTextField txtNombre, txtIdentificacion, txtCorreo, txtTelefono, txtFechaNacimiento, txtFechaInicio, txtFechaSalida;
     private ArrayList<Habitacion> habitacionesRegistradas = new ArrayList<>();
     private String fechaLlegada, fechaSalida;
+    JComboBox<String> cbHabitacion;
 
     public FregistrarHuesped(FHuesped fPrincipal, Hotel hotel) {
         super("Realizar reserva");
@@ -48,6 +51,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         labelFechas.setBackground(fondo);
         panel.add(labelFechas);
         fech = new JLabel();
+        fech.setForeground(Color.WHITE);
         panel.add(fech);
         JLabel labelNumHuespedes = new JLabel("Número de huéspedes");
         labelNumHuespedes.setFont(new Font("Georgia", Font.BOLD, 18));
@@ -66,8 +70,8 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         labelTipoHabitacion.setOpaque(true);
         labelTipoHabitacion.setBackground(fondo);
         panel.add(labelTipoHabitacion);
-         hab = new JLabel();
-         hab.setForeground(Color.WHITE);
+        hab = new JLabel();
+        hab.setForeground(Color.WHITE);
         panel.add(hab);        
 
         add(panel, BorderLayout.SOUTH);
@@ -107,7 +111,7 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
         panelHabitaciones.add(ventaHabitaciones, BorderLayout.CENTER);
 
         JLabel lHabitacion = new JLabel("Habitación:");
-        JComboBox<String> cbHabitacion = new JComboBox<>();
+        cbHabitacion = new JComboBox<>();
         cbHabitacion.addItem("Habitación 1");
         cbHabitacion.addItem("Habitación 2");
         cbHabitacion.addItem("Habitación 3");
@@ -118,21 +122,19 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
                 String seleccion = (String) cbHabitacion.getSelectedItem();
                 if (seleccion != null) {
                     HashMap<Integer, Habitacion> habitacionesDis = recepcionista.habitaciones_disponibles(habitaciones);
+                    System.out.println(habitacionesDis);
                     if (seleccion.equals("Habitación 1")) {
                         hab.setText("1201");
                         Habitacion habitacionEscogida = habitacionesDis.get(1201);
                         habitacionesRegistradas.add(habitacionEscogida);
-                        System.out.println(habitacionesRegistradas);
                     } else if (seleccion.equals("Habitación 2")) {
                         hab.setText("201");
                         Habitacion habitacionEscogida = habitacionesDis.get(201);
                         habitacionesRegistradas.add(habitacionEscogida);
-                        System.out.println(habitacionesRegistradas);
                     } else if (seleccion.equals("Habitación 3")) {
                         hab.setText("301");
                         Habitacion habitacionEscogida = habitacionesDis.get(301);
                         habitacionesRegistradas.add(habitacionEscogida);
-                        System.out.println(habitacionesRegistradas);
                     }
                 }
             }
@@ -244,7 +246,11 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         if (comando.equals("ACEPTAR")) {
-            cardLayout.show(contentP, "registrarHuesped"); // Mostrar el panel de registro de huéspedes
+            if (hab.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione una habitación");
+            }
+            else{
+            cardLayout.show(contentP, "registrarHuesped"); }// Mostrar el panel de registro de huéspedes
         } else if (comando.equals("AGREGARHUESPED")) {
             if (txtNombre.getText().equals("") || txtIdentificacion.getText().equals("") || txtCorreo.getText().equals("") || txtTelefono.getText().equals("") || txtFechaNacimiento.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Por favor, ingrese todos los datos");
@@ -252,6 +258,8 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             else{numHues += 1;
             hues.setText(numHues + "");}
             
+            fech.setText(txtFechaInicio.getText() + " - " + txtFechaSalida.getText());
+
             String nombre = txtNombre.getText();
             String identificacion = txtIdentificacion.getText();
             String correo = txtCorreo.getText();

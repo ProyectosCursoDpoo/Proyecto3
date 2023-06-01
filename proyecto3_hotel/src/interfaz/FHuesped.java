@@ -61,7 +61,7 @@ public class FHuesped extends JPanel implements ActionListener {
         fechaFin.setForeground(Color.WHITE);
         fechaFin.setHorizontalAlignment(JLabel.CENTER);
 
-        JLabel labelImportante = new JLabel("Formato de fecha: mm/dd/aaaa Ej: 01/01/2021");
+        JLabel labelImportante = new JLabel("Formato de fecha: mm/dd/aaaa Ej: 01.01.2021");
         labelImportante.setFont(new Font("Georgia", Font.BOLD, 18));
         labelImportante.setForeground(Color.WHITE);
         labelImportante.setHorizontalAlignment(JLabel.CENTER);
