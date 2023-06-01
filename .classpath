@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
-	<classpathentry kind="src" path="proyecto3_hotel/src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
@@ -12,5 +10,6 @@
 	<classpathentry kind="lib" path="proyecto3_hotel\\lib\\jfreechart-1.0.1.jar"/>
 	<classpathentry kind="lib" path="proyecto3_hotel\\lib\\pdfbox-3.0.0-alpha3.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="src" path="proyecto3_hotel/src"/>
 	<classpathentry kind="output" path="proyecto3_hotel/bin"/>
 </classpath>
