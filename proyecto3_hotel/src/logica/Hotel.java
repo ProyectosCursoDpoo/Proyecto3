@@ -23,7 +23,7 @@ public class Hotel {
     public HashMap<Integer, Consumo> consumos = new HashMap<>();
     public HashMap<String, TarjetaPayU> tarjetasPayU = new HashMap<>();
     public HashMap<String, TarjetaPayPal> tarjetasPayPal = new HashMap<>();
-    public HashMap<String, Tarjeta> tarjetasApplePay = new HashMap<>();
+    public HashMap<String, TarjetaApplePay> tarjetasApplePay = new HashMap<>();
 
     public boolean parking_gratis = true;
     public boolean piscina = true;
@@ -87,9 +87,9 @@ public class Hotel {
         return this.tarjetasPayPal;
     }
 
-    // public HashMap<String, TarjetaApple> getTarjetasApplePay() {
-    // return this.tarjetasApplePay;
-    // }
+    public HashMap<String, TarjetaApplePay> getTarjetasApplePay() {
+        return this.tarjetasApplePay;
+    }
 
     public HashMap<Integer, Huesped> getHuespedes() {
         return this.huespedes;
@@ -632,6 +632,19 @@ public class Hotel {
                     TarjetaPayPal tarjeta = new TarjetaPayPal(nombre, id, correo, numTarjeta, cvv, fechaVencimiento,
                             estado, token, saldo);
                     tarjetasPayPal.put(numTarjeta, tarjeta);
+                } else if (plataforma.equals("applePay")) {
+                    String nombre = partes[1];
+                    int id = Integer.parseInt(partes[2]);
+                    String correo = partes[3];
+                    String numTarjeta = partes[4];
+                    int cvv = Integer.parseInt(partes[5]);
+                    String fechaVencimiento = partes[6];
+                    boolean estado = (partes[7].equals("True") ? true : false);
+                    String codigoApple = partes[8];
+                    Double saldo = Double.parseDouble(partes[9]);
+                    TarjetaApplePay tarjeta = new TarjetaApplePay(nombre,
+                            id, correo, numTarjeta, cvv, fechaVencimiento, estado, codigoApple, saldo);
+                    tarjetasApplePay.put(numTarjeta, tarjeta);
                 }
 
                 linea = br.readLine();
