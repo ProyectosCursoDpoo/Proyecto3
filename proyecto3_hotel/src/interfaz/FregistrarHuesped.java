@@ -278,9 +278,9 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             datos.put("correo", correo);
             datos.put("telefono", telefono);
             datos.put("fechaNacimiento", fechaNacimiento);
-            Huesped huesped = new Huesped(nombre, Integer.parseInt(identificacion), correo, telefono,
-                    fechaNacimiento);
-            huespedesRegistrados.add(huesped);
+            //Huesped huesped = new Huesped(nombre, Integer.parseInt(identificacion), correo, telefono,
+              //      fechaNacimiento);
+            //huespedesRegistrados.add(huesped);
 
         } else if (comando.equals("TERMINAR")) {
             fechaLlegada = txtFechaInicio.getText();
