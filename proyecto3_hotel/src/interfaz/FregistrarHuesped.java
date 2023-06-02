@@ -233,10 +233,9 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
     }
 
     public void pagoInmediato() {
-        HashMap<String, TarjetaPayU> tarjetas = hotel.getTarjetasPayU();
-        FpayU panelP = new FpayU(2000, tarjetas);
+        FfacturaReserva fregistrarHuesped = new FfacturaReserva(hotel, 401);
 
-        contentP.add(panelP, "pagoInmediato");
+        contentP.add(fregistrarHuesped, "pagoInmediato");
         cardLayout.show(contentP, "pagoInmediato");
     }
 
@@ -295,11 +294,11 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
             HashMap<Integer, Grupo> grupos = hotel.getGrupos();
             HashMap<Integer, Habitacion> habitaciones = hotel.getHabitaciones();
 
-            recepcionista.iniciarReserva(huespedes, reservas, habitaciones,
-                    recepcionista, tarifasEstandar,
-                    tarifasSuite,
-                    tarifasSuite2, grupos, habitacionesRegistradas, huespedesRegistrados, fechaLlegada,
-                    fechaSalida, hotel);
+            //recepcionista.iniciarReserva(huespedes, reservas, habitaciones,
+              //      recepcionista, tarifasEstandar,
+                //    tarifasSuite,
+                  //  tarifasSuite2, grupos, habitacionesRegistradas, huespedesRegistrados, fechaLlegada,
+                    //fechaSalida, hotel);
 
             JOptionPane.showMessageDialog(null, "Reserva creada con exito", "Exito",
                     JOptionPane.INFORMATION_MESSAGE);

@@ -360,11 +360,11 @@ public class Hotel {
         } while (opcion != 7);
     }
 
-    private void cargarDatabase() {
+    public void cargarDatabase() throws FileNotFoundException{
         System.out.println("Cargando DataBase de Usuarios");
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File(
-                    "../Proyecto3/proyecto3_hotel/data/database.txt")));
+                    fileDatabase)));
             // "../proyecto2/entrega2/proyecto2_hotel/data/database.txt"
             String linea;
             linea = br.readLine();
@@ -378,7 +378,9 @@ public class Hotel {
                 linea = br.readLine();
             }
             br.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -390,10 +392,10 @@ public class Hotel {
         }
     }
 
-    private void cargarHabitaciones() {
+    public void cargarHabitaciones() throws FileNotFoundException{
         try {
             BufferedReader br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/habitaciones.txt")));
+                    new FileReader(new File(fileHabitaciones)));
             String linea;
             linea = br.readLine();
             while (linea != null) {
@@ -461,12 +463,14 @@ public class Hotel {
             }
             setHabitaciones(habitaciones);
             br.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void cargarTarifa(File archivo, HashMap<String, Integer> tarifa) {
+    public void cargarTarifa(File archivo, HashMap<String, Integer> tarifa) throws FileNotFoundException{
         try {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
             String linea;
@@ -483,15 +487,17 @@ public class Hotel {
                 linea = br.readLine();
             }
             br.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void cargarPlatos() {
+    public void cargarPlatos()throws FileNotFoundException{
         try {
             BufferedReader br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/menu.txt")));
+                    new FileReader(new File(filePlatos)));
             String linea;
             linea = br.readLine();
             while (linea != null) {
@@ -510,18 +516,20 @@ public class Hotel {
                 linea = br.readLine();
             }
             br.close();
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void cargarHuespedes() {
+    public void cargarHuespedes() throws FileNotFoundException{
         try {
             BufferedReader br;
             String linea;
 
             br = new BufferedReader(new FileReader(new File(
-                    "../Proyecto3/proyecto3_hotel/data/hueped.txt")));
+                    fileHuespedes)));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -536,17 +544,19 @@ public class Hotel {
             }
             br.close();
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    private void cargarReservas() {
+    public void cargarReservas() throws FileNotFoundException{
         BufferedReader br;
         String linea;
         try {
-            br = new BufferedReader(new FileReader(new File("../Proyecto3/proyecto3_hotel/data/reserva.txt")));
+            br = new BufferedReader(new FileReader(new File(fileReservas)));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -567,16 +577,19 @@ public class Hotel {
 
                 linea = br.readLine();
             }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void cargarServicios() {
+    public void cargarServicios() throws FileNotFoundException{
         BufferedReader br;
         String linea;
         try {
             br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/servicios.txt")));
+                    new FileReader(new File(fileServicios)));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -597,16 +610,19 @@ public class Hotel {
                 }
                 linea = br.readLine();
             }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    private void cargarConsumos() {
+    public void cargarConsumos() throws FileNotFoundException{
         BufferedReader br;
         String linea;
         try {
             br = new BufferedReader(
-                    new FileReader(new File("../Proyecto3/proyecto3_hotel/data/consumos.txt")));
+                    new FileReader(new File(fileConsumos)));
             linea = br.readLine();
             while (linea != null) {
                 String[] partes = linea.split(";");
@@ -623,7 +639,10 @@ public class Hotel {
 
                 linea = br.readLine();
             }
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -637,16 +656,43 @@ public class Hotel {
             while (linea != null) {
                 String[] partes = linea.split(";");
                 String plataforma = partes[0];
-                String nombre = partes[1];
-                int id = Integer.parseInt(partes[2]);
-                String correo = partes[3];
-                String numTarjeta = partes[4];
-                int cvv = Integer.parseInt(partes[5]);
-                String fechaVencimiento = partes[6];
-                Double saldo = Double.parseDouble(partes[7]);
+
                 if (plataforma.equals("payU")) {
+                    String nombre = partes[1];
+                    int id = Integer.parseInt(partes[2]);
+                    String correo = partes[3];
+                    String numTarjeta = partes[4];
+                    int cvv = Integer.parseInt(partes[5]);
+                    String fechaVencimiento = partes[6];
+                    Double saldo = Double.parseDouble(partes[7]);
                     TarjetaPayU tarjeta = new TarjetaPayU(nombre, id, correo, numTarjeta, cvv, fechaVencimiento, saldo);
                     tarjetasPayU.put(numTarjeta, tarjeta);
+                } else if (plataforma.equals("payPal")) {
+                    String nombre = partes[1];
+                    int id = Integer.parseInt(partes[2]);
+                    String correo = partes[3];
+                    String numTarjeta = partes[4];
+                    int cvv = Integer.parseInt(partes[5]);
+                    String fechaVencimiento = partes[6];
+                    boolean estado = (partes[7].equals("True") ? true : false);
+                    String token = partes[8];
+                    Double saldo = Double.parseDouble(partes[9]);
+                    TarjetaPayPal tarjeta = new TarjetaPayPal(nombre, id, correo, numTarjeta, cvv, fechaVencimiento,
+                            estado, token, saldo);
+                    tarjetasPayPal.put(numTarjeta, tarjeta);
+                } else if (plataforma.equals("applePay")) {
+                    String nombre = partes[1];
+                    int id = Integer.parseInt(partes[2]);
+                    String correo = partes[3];
+                    String numTarjeta = partes[4];
+                    int cvv = Integer.parseInt(partes[5]);
+                    String fechaVencimiento = partes[6];
+                    boolean estado = (partes[7].equals("True") ? true : false);
+                    String codigoApple = partes[8];
+                    Double saldo = Double.parseDouble(partes[9]);
+                    TarjetaApplePay tarjeta = new TarjetaApplePay(nombre,
+                            id, correo, numTarjeta, cvv, fechaVencimiento, estado, codigoApple, saldo);
+                    tarjetasApplePay.put(numTarjeta, tarjeta);
                 }
 
                 linea = br.readLine();
@@ -655,12 +701,12 @@ public class Hotel {
         }
     }
 
-    private void cargarGrupos() {
+    public void cargarGrupos() throws FileNotFoundException {
         BufferedReader br;
         String linea;
 
         try {
-            br = new BufferedReader(new FileReader(new File("../Proyecto3/proyecto3_hotel/data/grupos.txt")));
+            br = new BufferedReader(new FileReader(new File(fileGrupos)));
             linea = br.readLine();
             while (linea != null) {
                 ArrayList<Huesped> huespedes_grupo = new ArrayList<>();
@@ -697,7 +743,10 @@ public class Hotel {
                 linea = br.readLine();
             }
             // System.out.println(grupos);
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException("No se encontro el archivo");
         } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
