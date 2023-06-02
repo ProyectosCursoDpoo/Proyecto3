@@ -118,8 +118,6 @@ public class FfacturaReserva extends JFrame implements ActionListener {
 
     }
 
-    // TODO hacer el cambio dinamico
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
