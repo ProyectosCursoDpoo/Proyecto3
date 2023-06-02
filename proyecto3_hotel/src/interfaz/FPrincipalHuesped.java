@@ -43,7 +43,8 @@ public class FPrincipalHuesped extends JFrame {
     addWindowListener(new WindowAdapter() {
         @Override
         public void windowClosing(WindowEvent e) {
-                hotel.guardarInformacion();}
+                //hotel.guardarInformacion();
+            }
     });
 
     // establece el tamaño del marco como las dimensiones de la pantalla
