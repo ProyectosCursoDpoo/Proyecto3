@@ -28,7 +28,7 @@ public class Hotel {
     public boolean bbq = true;
     public boolean recepcion_24 = true;
     public boolean pet_friendly = true;
-    
+
     public String fileHabitaciones = "../Proyecto3/proyecto3_hotel/data/habitaciones.txt";
     public String fileDatabase = "../Proyecto3/proyecto3_hotel/data/database.txt";
     public String fileHuespedes = "../Proyecto3/proyecto3_hotel/data/hueped.txt";
@@ -71,41 +71,41 @@ public class Hotel {
         }
 
     }
-    
+
     public void setFileHabitaciones(String file) {
-    	fileHabitaciones = file;
+        fileHabitaciones = file;
     }
 
     public void setFileDataBase(String file) {
-    	fileDatabase = file;
+        fileDatabase = file;
     }
 
     public void setFileHuespedes(String file) {
-    	fileHuespedes = file;
+        fileHuespedes = file;
     }
 
     public void setFileGrupos(String file) {
-    	fileGrupos = file;
+        fileGrupos = file;
     }
 
     public void setFileReservas(String file) {
-    	fileReservas = file;
+        fileReservas = file;
     }
 
     public void setFileServicios(String file) {
-    	fileServicios = file;
+        fileServicios = file;
     }
 
     public void setFileConsumos(String file) {
-    	fileConsumos = file;
+        fileConsumos = file;
     }
 
     public void setFileTarjetas(String file) {
-    	fileTarjetas = file;
+        fileTarjetas = file;
     }
 
     public void setFilePlatos(String file) {
-    	filePlatos = file;
+        filePlatos = file;
     }
 
     public HashMap<String, TarjetaPayU> getTarjetasPayU() {
@@ -360,7 +360,7 @@ public class Hotel {
         } while (opcion != 7);
     }
 
-    public void cargarDatabase() throws FileNotFoundException{
+    public void cargarDatabase() throws FileNotFoundException {
         System.out.println("Cargando DataBase de Usuarios");
         try {
             BufferedReader br = new BufferedReader(new FileReader(new File(
@@ -392,7 +392,7 @@ public class Hotel {
         }
     }
 
-    public void cargarHabitaciones() throws FileNotFoundException{
+    public void cargarHabitaciones() throws FileNotFoundException {
         try {
             BufferedReader br = new BufferedReader(
                     new FileReader(new File(fileHabitaciones)));
@@ -470,7 +470,7 @@ public class Hotel {
         }
     }
 
-    public void cargarTarifa(File archivo, HashMap<String, Integer> tarifa) throws FileNotFoundException{
+    public void cargarTarifa(File archivo, HashMap<String, Integer> tarifa) throws FileNotFoundException {
         try {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
             String linea;
@@ -494,7 +494,7 @@ public class Hotel {
         }
     }
 
-    public void cargarPlatos()throws FileNotFoundException{
+    public void cargarPlatos() throws FileNotFoundException {
         try {
             BufferedReader br = new BufferedReader(
                     new FileReader(new File(filePlatos)));
@@ -523,7 +523,7 @@ public class Hotel {
         }
     }
 
-    public void cargarHuespedes() throws FileNotFoundException{
+    public void cargarHuespedes() throws FileNotFoundException {
         try {
             BufferedReader br;
             String linea;
@@ -552,7 +552,7 @@ public class Hotel {
 
     }
 
-    public void cargarReservas() throws FileNotFoundException{
+    public void cargarReservas() throws FileNotFoundException {
         BufferedReader br;
         String linea;
         try {
@@ -584,7 +584,7 @@ public class Hotel {
         }
     }
 
-    public void cargarServicios() throws FileNotFoundException{
+    public void cargarServicios() throws FileNotFoundException {
         BufferedReader br;
         String linea;
         try {
@@ -617,7 +617,7 @@ public class Hotel {
         }
     }
 
-    public void cargarConsumos() throws FileNotFoundException{
+    public void cargarConsumos() throws FileNotFoundException {
         BufferedReader br;
         String linea;
         try {
@@ -646,7 +646,7 @@ public class Hotel {
         }
     }
 
-    private void cargarTarjetas() {
+    public void cargarTarjetas() {
         BufferedReader br;
         String linea;
         try {
