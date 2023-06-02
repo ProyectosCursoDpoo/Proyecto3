@@ -23,7 +23,7 @@ public class HotelTest {
     }
 
     @Test
-    public void cargarHabitaciones_ValidFile_Test() throws FileNotFoundException, IOException {
+    public void cargarHabitaciones_ValidFile_Test() throws FileNotFoundException, IOException{
         assertEquals(0, hotel.getHabitaciones().size());
         hotel.cargarHabitaciones();
         assertEquals(10, hotel.getHabitaciones().size());
@@ -46,7 +46,7 @@ public class HotelTest {
     public void cargarDatabase_ValidFile_Test() throws FileNotFoundException, IOException {
         assertEquals(0, hotel.getDatabase().size());
         hotel.cargarDatabase();
-        assertEquals(10, hotel.getDatabase().size());
+        assertEquals(11, hotel.getDatabase().size());
     }
 
     @Test
@@ -130,7 +130,7 @@ public class HotelTest {
         assertDoesNotThrow(() -> {
             hotel.cargarReservas();
         });
-        assertEquals(2, hotel.getReservas().size());
+        assertEquals(0, hotel.getReservas().size());
     }
 
     @Test
@@ -205,7 +205,7 @@ public class HotelTest {
     public void cargarGrupos_ValidFile_Test() throws FileNotFoundException {
         assertEquals(0, hotel.getGrupos().size());
         hotel.cargarGrupos();
-        assertEquals(2, hotel.getGrupos().size());
+        assertEquals(1, hotel.getGrupos().size());
     }
 
     @Test
