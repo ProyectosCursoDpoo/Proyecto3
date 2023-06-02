@@ -233,9 +233,9 @@ public class FregistrarHuesped extends JFrame implements ActionListener {
     }
 
     public void pagoInmediato() {
-        FfacturaReserva fregistrarHuesped = new FfacturaReserva(hotel, 401);
+        FfacturaReserva f = new FfacturaReserva(hotel, 401);
 
-        contentP.add(fregistrarHuesped, "pagoInmediato");
+        contentP.add(f, "pagoInmediato");
         cardLayout.show(contentP, "pagoInmediato");
     }
 
