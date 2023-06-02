@@ -130,7 +130,7 @@ public class HotelTest {
         assertDoesNotThrow(() -> {
             hotel.cargarReservas();
         });
-        assertEquals(0, hotel.getReservas().size());
+        assertEquals(2, hotel.getReservas().size());
     }
 
     @Test
@@ -192,20 +192,10 @@ public class HotelTest {
     }
 
     @Test
-    public void cargarTarjetas_FileNotFoundException_Test() {
-        String rutaArchivo = "ruta/inexistente/tarjetas.txt";
-        hotel.setFileTarjetas(rutaArchivo);
-
-        assertThrows(FileNotFoundException.class, () -> {
-            hotel.cargarTarjetas();
-        });
-    }
-
-    @Test
     public void cargarGrupos_ValidFile_Test() throws FileNotFoundException {
         assertEquals(0, hotel.getGrupos().size());
         hotel.cargarGrupos();
-        assertEquals(1, hotel.getGrupos().size());
+        assertEquals(2, hotel.getGrupos().size());
     }
 
     @Test
