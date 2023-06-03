@@ -126,7 +126,7 @@ public class FfacturaReserva extends JFrame implements ActionListener {
         } else if (comando.equals("pagar")) {
 
             String opc = JOptionPane.showInputDialog(
-                    "1. Pasarele de pago Payu\n2. Pasarele de pago Paypal\n3. Pasarele de pago ApplePay", "1");
+                    "1. Pasarela de pago Payu\n2. Pasarela de pago Paypal\n3. Pasarela de pago ApplePay", "1");
             if (opc.equals("1")) {
                 HashMap<String, TarjetaPayU> tarjetasPayU = hotel.getTarjetasPayU();
                 FpayU payu = new FpayU(this.total, tarjetasPayU);
@@ -162,15 +162,22 @@ public class FfacturaReserva extends JFrame implements ActionListener {
                     ex.printStackTrace();
                 }
 
-                hotel.logOut();
+                // hotel.logOut();
 
                 this.dispose();
             } else if (opc.equals("2")) {
                 HashMap<String, TarjetaPayPal> tarjetasPaypal = hotel.getTarjetasPayPal();
                 // System.out.println(tarjetasPaypal);
-                FpayPal paypal = new FpayPal(this.total, tarjetasPaypal);
+                // FpayPal paypal = new FpayPal(this.total, tarjetasPaypal);
+                FramePal paypal = new FramePal(this.total, tarjetasPaypal);
                 paypal.setVisible(true);
+                try {
+                    this.add(paypal);
 
+                } catch (Exception exx) {
+                    this.add(paypal);
+                    System.out.println("Ojo");
+                }
                 String texto = "";
                 try {
                     BufferedReader br = new BufferedReader(new FileReader(
@@ -201,7 +208,7 @@ public class FfacturaReserva extends JFrame implements ActionListener {
                     ex.printStackTrace();
                 }
 
-                hotel.logOut();
+                // hotel.logOut();
 
                 this.dispose();
             } else if (opc.equals("3")) {
@@ -239,7 +246,7 @@ public class FfacturaReserva extends JFrame implements ActionListener {
                     ex.printStackTrace();
                 }
 
-                hotel.logOut();
+                // hotel.logOut();
 
                 this.dispose();
             }
